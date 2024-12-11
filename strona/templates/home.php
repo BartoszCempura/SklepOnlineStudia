@@ -48,27 +48,27 @@
   <!-- First Row -->
   <div class="row mb-3">
     <div class="col-4"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">First Row, First Column</div>
+      <div class="p-3 bg-light shadow-sm rounded-3">Pierwszy rząd, pierwsza kolumna</div>
     </div>
     <div class="col-8"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">First Row, Second Column</div>
+      <div class="p-3 bg-light shadow-sm rounded-3">Pierwszy rząd, druga kolumna</div>
     </div>
   </div>
 
   <!-- Second Row -->
   <div class="row mb-3">
     <div class="col-12">
-      <div class="p-3 bg-light shadow-sm rounded-3">Second Row, Full Width</div>
+      <div class="p-3 bg-light shadow-sm rounded-3">Drugi rząd/div>
     </div>
   </div>
 
   <!-- Third Row -->
   <div class="row">
     <div class="col-4"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">Third Row, First Column</div>
+      <div class="p-3 bg-light shadow-sm rounded-3">trzeci rząd, pierwsza kolumna</div>
     </div>
     <div class="col-8"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">Third Row, Second Column</div>
+      <div class="p-3 bg-light shadow-sm rounded-3">trzeci rząd, druga kolumna</div>
     </div>
   </div>
 </div>
