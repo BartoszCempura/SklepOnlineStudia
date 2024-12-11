@@ -2,7 +2,7 @@
 // definiujemy ścieżki do template
 $baseTemplate = __DIR__ . '/strona/templates/base.html'; 
 $page = $_GET['page'] ?? 'home'; // default
-$contentPath = __DIR__ . "/strona/templates/{$page}.html";
+$contentPath = __DIR__ . "/strona/templates/{$page}.php";
 
 // sprawdzamy czy base template jest
 if (file_exists($baseTemplate)) {

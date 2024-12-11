@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Redirect requests like /home to /index.php?page=home
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?page=$1 [L,QSA]
+
+# Ensure the root (/) goes to the default page (e.g., /home)
+RewriteRule ^$ index.php?page=home [L,QSA]
