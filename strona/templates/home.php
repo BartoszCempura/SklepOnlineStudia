@@ -21,14 +21,14 @@
         <img src="strona/static/SliderImmages/SliderPromo.png" class="d-block w-100" alt="Slide 2">
             <div class="carousel-caption d-none d-md-block text-start position-absolute top-50 start-10 translate-middle-y">
                 <h2 class="text-black"><b>Szukasz Prezentu dla bliskich??</b></h2>
-                <p class="text-black">U naz największy wybór produktów technicznych</p>
+                <p class="text-black">U nas największy wybór produktów technicznych.</p>
             </div>
     </div>
     <div class="carousel-item">
         <img src="strona/static/SliderImmages/SliderPS5.png" class="d-block w-100" alt="Slide 3">
             <div class="carousel-caption d-none d-md-block text-start position-absolute top-50 start-10 translate-middle-y">
                 <h2><b>Domowa rozrywka w najlepszym wydaniu</b></h2>
-                <p>Najnowsza konsola of Playstation w promocyjnej cenie</p>
+                <p>Najnowsza konsola od Playstation w promocyjnej cenie.</p>
             </div>
         </div>
     </div>
