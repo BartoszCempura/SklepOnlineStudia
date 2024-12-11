@@ -58,7 +58,7 @@
   <!-- Second Row -->
   <div class="row mb-3">
     <div class="col-12">
-      <div class="p-3 bg-light shadow-sm rounded-3">Drugi rząd/div>
+      <div class="p-3 bg-light shadow-sm rounded-3">Drugi rząd</div>
     </div>
   </div>
 
