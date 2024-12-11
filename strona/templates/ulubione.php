@@ -1,1 +1,1 @@
-<h2 align="center" class="test">Ulubione</h2>
+<h2 align="center">Ulubione</h2>

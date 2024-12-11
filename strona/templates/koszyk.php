@@ -1,1 +1,1 @@
-<h2 align="center" class="bg-danger">Koszyk</h2>
+<h2 align="center">Koszyk</h2>

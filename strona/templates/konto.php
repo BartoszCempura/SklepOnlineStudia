@@ -1,1 +1,1 @@
-<h2 align="center" class="test">Twoje Konto</h2>
+<h2 align="center">Twoje Konto</h2>
