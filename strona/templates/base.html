@@ -78,39 +78,133 @@
 
     <div class="bg-light shadow-sm mb-5">
       <div class="container-fluid border-top border-bottom">
-          <div class="row justify-content-center">
-              <div class="col-auto">
-                <a class="" aria-label="nav_komputery" href="">
-                  <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Komputery</b></button>
-                </a>
-              </div>
-              <div class="col-auto">
-                <a class="" aria-label="nav_akcesoria" href="">
-                  <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Akcesoria</b></button>
-                </a>
-              </div>
-              <div class="col-auto">
-                <a class="" aria-label="nav_wyprzedaz" href="">
-                  <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Wyprzedaż</b></button>
-                </a>
-              </div>
-              <div class="col-auto">
-                <a class="" aria-label="nav_Wiecej" href="">
-                  <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Więcej Informacji</b></button>
-                </a>
-              </div>
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <b>Komputery</b>
+              </button>
+    
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Laptop</a></li>
+                <li><a class="dropdown-item" href="#">PC</a></li>
+                <li><a class="dropdown-item" href="#">AIO</a></li>
+                <li><a class="dropdown-item" href="#">Tablet</a></li>
+                <li><a class="dropdown-item" href="#">Smartphone</a></li>
+              </ul>
+            </div>
           </div>
+    
+          <div class="col-auto">
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <b>Akcesoria</b>
+              </button>
+    
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Monitor</a></li>
+                <li><a class="dropdown-item" href="#">Mysz</a></li>
+                <li><a class="dropdown-item" href="#">Klawiatura</a></li>
+                <li><a class="dropdown-item" href="#">Kontroler</a></li>
+                <li><a class="dropdown-item" href="#">Kable</a></li>
+              </ul>
+            </div>
+          </div>
+    
+    
+          <div class="col-auto">
+            <a class="" aria-label="nav_wyprzedaz" href="">
+              <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Wyprzedaż</b></button>
+            </a>
+          </div>
+    
+          <div class="col-auto">
+            <a class="" aria-label="nav_Wiecej" href="">
+              <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Więcej Informacji</b></button>
+            </a>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
 
     {{ content }}
 
   </div>
   
-  <footer>
-
-
-  </footer>
+  
+    <footer class="bg-light pt-5 d-flex flex-column align-items-center">
+      <div class="container">
+        <div class="row text-center text-md-start">
+          <!-- First Column: Contact Information -->
+          <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
+            <h5 class="fw-bold mb-3" style="margin-right: 170px;">Kontakt</h5>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+              <i class="bi bi-telephone me-2"></i>
+              <span> +1 123 456 789</span>
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-envelope me-2"></i>
+                <span>contact@example.com</span>
+              </li>
+              <li>
+                <i class="bi bi-geo-alt me-2 "></i>
+                <span>Kwiatka 2 09-400 PŁOCK, Polska</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Second Column: Popular Articles -->
+          <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
+            <h5 class="fw-bold" style="margin-right: 65px;">Produkty</h5>
+            <ul class="list-unstyled ">
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Promocje</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Nowości</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Wyprzedaż</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Karty podarunkowe</a></li>
+            </ul>
+          </div>
+          
+          <!-- Third Column: More Articles -->
+          <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
+            <h5 class="fw-bold" style="margin-right: 130px;">Informacja</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Dostawa i płatności</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Kredyt</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Ubezpieczenia</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Zwroty i reklamacje</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Najczęściej zadawane pytania</a></li>
+            </ul>
+          </div>
+          
+          <!-- Fourth Column: Quick Links -->
+          <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
+            <h5 class="fw-bold" style="margin-right: 80px;">O sklepie</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">O nas</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Regulamin</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Polityka prywatności</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Polityka cookies</a></li>        
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Opinie</a></li>
+              <li><a href="#" class="text-decoration-none text-hover fw-bold">Kariera</a></li> 
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p>@ 2024-2025 SklepOnline by Bartosz Cempura and Yaroslav Chausov </p>
+    </footer>
+    
+    <style>
+      .dropdown-toggle::after {
+        display: none !important; /* brak arrow przy dropdown*/
+      }
+    </style>
 
     <script src="strona/static/index.js"></script>
   
