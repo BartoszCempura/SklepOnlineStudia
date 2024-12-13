@@ -3,11 +3,11 @@
 session_start();
 require_once("./include/functions.php");
 
-$content = "CONTENT"; // kod wykonany w przypakdu autoryzowanego usera
-handleUser($content);
+if(isset($_SESSION['ID']))
+{
+    echo '<form action="./include/logout.php">
+            <button type="submit">logout</button>
+          </form>';
+}
 
 ?>
-
-<form action="./include/logout.php">
-    <button type="submit">logout</button>
-</form>

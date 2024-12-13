@@ -34,7 +34,7 @@ $query->bind_param("ssssss", $login, $hashedPassword, $name, $surname, $email, $
 if($query->execute())
 {
     $_SESSION['ID'] = $client_conn->insert_id; 
-    header("location: ../rejestracja?error=none");
+    header("location: ../rejestracja?error=registrationnone");
 }
 
 exit();

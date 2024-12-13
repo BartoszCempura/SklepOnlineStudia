@@ -19,7 +19,7 @@ if ($row = $result->fetch_assoc())
     if (password_verify($password, $row['Password'])) {
         session_start();
         $_SESSION['ID'] = $row['ID'];
-        header("Location: ../logowanie?error=none");
+        header("Location: ../logowanie?error=loginnone");
         exit();
     } 
     else 

@@ -81,7 +81,14 @@ function raiseMessageAndRedirect($redirectURL)
                     Nie znaleziono użyktownika o takim imieniu!
                   </div>';
         }
-        if($_GET['error'] === 'none')
+        if($_GET['error'] === 'loginnone')
+        {
+            echo '<div class="alert alert-success" role="alert">
+                    Logowanie odbyło się poprawnie!
+                  </div>';
+            header("Refresh: 1; URL=$redirectURL");
+        }
+        if($_GET['error'] === 'registrationnone')
         {
             echo '<div class="alert alert-success" role="alert">
                     Rejestracja odbyła się poprawnie!
