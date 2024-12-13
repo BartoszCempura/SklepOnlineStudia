@@ -1,3 +1,6 @@
+.test{
+    background-color: red;
+}
 .hover-fill:hover {
     fill: #5e31f9;
 }
@@ -9,3 +12,39 @@
     color: #5e31f9;
     
 }
+
+/* ---------------footer-----------------*/
+
+.text-hover-footer li {
+    position: relative; /* pozycjonowanie znacznika */
+}
+
+.text-hover-footer a {
+    color: grey; /* kolor tekstu linku w liście */
+}
+
+.text-hover-footer li:hover a {
+    color: #5e31f9; /* zmiana koloru tekstu  */
+}
+
+
+.text-hover-footer li::before {
+    content: ''; /* brak znacznika default */
+    position: absolute;
+    left: -1em; /* dystans od tekstu */
+    color: transparent; /* dodadtkowe zabespieczenie aby nie było widać znacznika */
+}
+
+.text-hover-footer li:hover::before {
+    content: '•'; /* mamy rodzaj znacznika */
+    color: #5e31f9; /* jego kolor */
+    font-size: 1.3em; /* rozmiar */ 
+    line-height: 1; /* pozycjonowanie znacznika */
+}
+
+.dropdown-item:hover {
+    color: #f0f0f0 ; /* Text color */
+    background-color: #7b6dfa; /* Example background color on hover */
+}
+
+
