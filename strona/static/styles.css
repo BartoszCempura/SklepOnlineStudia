@@ -42,9 +42,45 @@
     line-height: 1; /* pozycjonowanie znacznika */
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover  {
     color: #f0f0f0 ; /* Text color */
     background-color: #7b6dfa; /* Example background color on hover */
 }
 
+.dropdown {
+    position: relative; /* Set the parent element to relative positioning */
+  }
 
+  .dropdown-menu {
+    position: absolute;
+    left: 50%; /* Move the dropdown menu to the center horizontally */
+    transform: translateX(-50%); /* Adjust the dropdown so it's truly centered */
+    display: none; /* Hide the dropdown menu by default */
+    opacity: 0; /* Make it invisible */
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0s 0.2s;
+  }
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s, visibility 0s 0s;
+  }
+  
+  .dropdown>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+      pointer-events: none;
+  }
+
+  ul.dropdown-menu li button {
+    border: none; /* Remove border */
+    background: none; /* Optional: removes background if necessary */
+  }
+  
+  /* Remove border from the <a> inside button */
+  ul.dropdown-menu li button a.dropdown-item {
+    border: none; /* Remove border from the <a> element */
+
+  }
+  

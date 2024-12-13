@@ -58,13 +58,30 @@
                 </path>
               </svg>
             </a>
-            <a class="btn btn-light mx-5" aria-label="panel klienta" href="konto">
+            <div class="dropdown">
+              <button class="btn btn-light mx-5">
+            <a aria-label="panel klienta" href="konto">
               <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                 <path
                   d="M13.1 15.79C11.772 14.51 11 12.35 11 10c0-3.5 1.875-6 5-6s5 2.5 5 6c0 2.35-.772 4.51-2.1 5.79.365.632.672 1.075.954 1.356.488.49 1.067.792 2.26 1.253l.384.148.395.153c.305.121.565.23.815.346C25.545 19.887 27 22.143 27 24.5a.5.5 0 0 1-.146.354C25.744 25.964 20.217 27 16 27c-4.216 0-9.743-1.036-10.854-2.146A.5.5 0 0 1 5 24.5c0-2.356 1.455-4.613 3.292-5.454.25-.115.51-.225.815-.346a40.51 40.51 0 0 1 .78-.301c1.192-.46 1.77-.764 2.26-1.253.281-.281.588-.724.953-1.355zm.797.62c-.377.641-.707 1.107-1.043 1.444-.617.617-1.29.97-2.608 1.478l-.385.148-.385.15c-.29.115-.535.218-.768.325-1.423.652-2.611 2.434-2.702 4.314C7.212 25.091 12.238 26 16 26c3.762 0 8.788-.909 9.994-1.73-.09-1.881-1.279-3.663-2.702-4.316a16.666 16.666 0 0 0-.768-.324 37.747 37.747 0 0 0-.385-.15l-.385-.148c-1.318-.509-1.99-.861-2.608-1.478-.336-.337-.666-.803-1.043-1.444A3.99 3.99 0 0 1 16 17a3.99 3.99 0 0 1-2.103-.59zM16 5c-2.5 0-4 2-4 5 0 3.26 1.644 6 4 6s4-2.74 4-6c0-3-1.5-5-4-5z">
                 </path>
               </svg>
             </a>
+          </button>
+
+          <ul class="dropdown-menu rounded-0 d-flex flex-column" aria-labelledby="dropdownMenuButton">
+            <li class="d-flex justify-content-center pb-2 border-bottom">
+              <button class="w-100">
+                <a class="dropdown-item" href="logowanie">Login</a>
+              </button>
+              </li>
+            <li class="d-flex justify-content-center py-2 border-bottom">
+              <button class="w-100">
+                <a class="dropdown-item" href="rejestracja">Sign Up</a>
+              </button>
+            </li>
+          </ul>
+          </div>
             <a class="btn btn-light" aria-label="koszyk" href="koszyk">
               <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                 <path fill-rule="evenodd"
@@ -90,7 +107,7 @@
     
               <!-- Dropdown Menu -->
               <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item rounded-1" href="#">Laptop</a></li>
+                <li><a class="dropdown-item rounded-1 ala" href="#">Laptop</a></li>
                 <li><a class="dropdown-item rounded-1" href="#">PC</a></li>
                 <li><a class="dropdown-item rounded-1" href="#">AIO</a></li>
                 <li><a class="dropdown-item rounded-1" href="#">Tablet</a></li>
