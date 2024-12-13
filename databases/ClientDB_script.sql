@@ -5,7 +5,7 @@ CREATE TABLE `User` (
     First_Name VARCHAR(255) NOT NULL,
     Last_Name VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE CHECK (Email LIKE '%@%.%'),
-    Phone_Number VARCHAR(20) CHECK (Phone_Number LIKE '+%') 
+    Phone_Number VARCHAR(20) CHECK (Phone_Number REGEXP '^[0-9]{9}$')  -- 9 digit phone number
 );
 
 CREATE TABLE Address (
