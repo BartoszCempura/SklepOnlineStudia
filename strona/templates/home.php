@@ -1,5 +1,5 @@
 
-<div style="margin-top: -2.9rem;" id="carouselExampleIndicators" class="carousel slide shadow" data-bs-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide shadow" data-bs-ride="carousel">
     
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
