@@ -73,7 +73,11 @@
           </button>
 <!-----------------------------Logowanie i menu konta użytkownika----------------------------------------------------------------------->
           <ul class="dropdown-menu rounded-0 d-flex flex-column" aria-labelledby="dropdownMenuButton">
-            <li class="d-flex justify-content-center pb-2 border-bottom">
+          <?php 
+        require_once("./include/functions.php");
+        if(!authorisedUser())
+        {
+          echo '<li class="d-flex justify-content-center pb-2 border-bottom">
               <button class="w-100">
                 <a class="dropdown-item" href="logowanie">Login</a>
               </button>
@@ -94,12 +98,31 @@
                  <i class="bi bi-gear me-2"></i>
                   <span>Ustawienia konta</span>
                 </a>
+            </li>'; 
+          }
+          else
+          { 
+              echo '
+                    <li class="d-flex justify-content-center py-2">
+              <a class="dropdown-item" href="#">
+               <i class="bi bi-geo-alt me-2"></i>
+                <span>Dane do zamówień</span>
+              </a>
+          </li>
+            <li class="d-flex justify-content-center py-2">
+                <a class="dropdown-item" href="#">
+                 <i class="bi bi-gear me-2"></i>
+                  <span>Ustawienia konta</span>
+                </a>
             </li>
             <li class="d-flex justify-content-center pt-2 border-top">
-              <button class="w-100">
-                <a class="dropdown-item" href="logowanie">Log out</a>
-              </button>
-            </li>
+                <a class="dropdown-item text-center" href="include/logout.php">Log out</a>
+            </li>'
+                    ;
+          }
+        ?>  
+          
+            
           </ul>
           </div>
           <!---------------------------------------------------------------------------------------------------------------------->
@@ -123,13 +146,13 @@
           <div class="col-auto">
             <!-- Dropdown Button -->
             <div class="dropdown">
-              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButton"
+              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonKomputer"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <b>Komputery</b>
               </button>
     
               <!-- Dropdown Menu -->
-              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButton">
+              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButtonKomputer">
                 <li><a class="dropdown-item" href="#">Laptop</a></li>
                 <li><a class="dropdown-item" href="#">PC</a></li>
                 <li><a class="dropdown-item" href="#">AIO</a></li>
@@ -142,13 +165,13 @@
           <div class="col-auto">
             <!-- Dropdown Button -->
             <div class="dropdown">
-              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButton"
+              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonAkcesoria"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <b>Akcesoria</b>
               </button>
     
               <!-- Dropdown Menu -->
-              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButton">
+              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButtonAkcesoria">
                 <li><a class="dropdown-item" href="#">Monitor</a></li>
                 <li><a class="dropdown-item" href="#">Mysz</a></li>
                 <li><a class="dropdown-item" href="#">Klawiatura</a></li>

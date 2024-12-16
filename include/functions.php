@@ -6,6 +6,7 @@ function authorisedUser(){
     return false;
 }
 
+/*
 function handleUser($content){
     if(authorisedUser() === false)
     {
@@ -19,6 +20,7 @@ function handleUser($content){
         $content; // SHOW CONTENT OF THE PAGE IF THE USER IS LOGGED IN
     }
 }
+*/
 
 function loginTaken($conn, $login){
     $sql = "SELECT * FROM `User` WHERE login = ?";

@@ -2,8 +2,8 @@
     <div class="w-25 border p-3 shadow" style="margin: 50px 0;">
 
     <?php
-  require_once("./include/functions.php");
-  raiseMessageAndRedirect("konto");                                 // Komunikat o przebiegu rejestracji oraz autoredirect w przypaku udanej rejestracji
+  require_once __DIR__ . '/..//../include/global.php';
+  raiseMessageAndRedirect("login");                                  // Komunikat o przebiegu rejestracji oraz autoredirect w przypaku udanej rejestracji
 ?>
 
 <form class="" action="./include/registration.php" method="post">

@@ -1,9 +1,12 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
     <div class="w-25 border p-3 shadow" style="margin: 50px 0;">
 
+
     <?php
-        require_once("./include/functions.php");
-        raiseMessageAndRedirect("konto");                                 // Komunikat o przebiegu rejestracji oraz autoredirect w przypaku udanej rejestracji
+    
+        require_once __DIR__ . '/..//../include/global.php';
+        raiseMessageAndRedirect("home");  
+                                   // Komunikat o przebiegu rejestracji oraz autoredirect w przypaku udanej rejestracji
     ?>
 
         <form action="./include/login.php" method="post"> 
@@ -26,4 +29,4 @@
         background-color: #5d51c8;
         color: #fff;
     }
-    </style>
+    </style> 
