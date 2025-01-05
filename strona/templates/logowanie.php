@@ -15,18 +15,16 @@
                 <input type="text" class="form-control" id="exampleInputEmail1" name="login" placeholder="login">
                 <input type="password" class="form-control mt-3" id="exampleInputPassword1" name="password" placeholder="hasło">
             </div>
+            
             <button type="submit" class="btn custom-btn rounded-0 mt-3 mb-2">Zaloguj się</button>
+
+            <div>          
+            <p class="d-inline">Nie masz konta??</p>
+            <a href="rejestracja" class="d-inline ms-2 text-decoration-none">
+             Sign Up
+            </a>
+            </div>
+            
         </form>
     </div>
 </div>
-
-<style>
-        .custom-btn {
-          background-color: #7b6dfa;
-          color: #fff;
-        }
-        .custom-btn:hover {
-        background-color: #5d51c8;
-        color: #fff;
-    }
-    </style> 

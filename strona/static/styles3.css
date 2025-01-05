@@ -88,3 +88,26 @@
     background-color: #7b6dfa;
     color: #fff;
 }
+
+.custom-btn:hover {
+  background-color: #5d51c8;
+  color: #fff;
+}
+
+.product-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.product-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
