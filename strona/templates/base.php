@@ -20,7 +20,7 @@
 
    <body>
 
-    <div class="py-3" style="background-color: rgb(226, 223, 223);">
+    <div class="" style="background-color: rgb(226, 223, 223);">
 
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^nav menu^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
