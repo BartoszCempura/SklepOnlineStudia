@@ -84,14 +84,18 @@
 
   }
   
-  .custom-btn {
-    background-color: #7b6dfa;
-    color: #fff;
+.custom-btn {
+  background-color: #7b6dfa;
+  color: #fff;
 }
 
 .custom-btn:hover {
   background-color: #5d51c8;
   color: #fff;
+}
+
+.form-check-input:checked {
+  background-color: #7b6dfa; /* Change the color when checked */
 }
 
 .product-container {
