@@ -1,26 +1,49 @@
 <div class="container mt-4">
   <div class="row mb-3">
     <div class="col-4"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">Filtry</div>
+      <div class="p-3 bg-light shadow-sm rounded-3">Filtry
+      <?php writeAllAttributes($site_conn); ?>
+      </div>
     </div>
     <div class="col-8"> 
       <div class="p-3 bg-light shadow-sm rounded-3">
 <!-----------------------------produkt z bazy, pojemnik----------------------------------------------------------------------->
-            <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
-                        <div class="product-container position-relative">
-                            <a href="#" class="mx-auto">
-                                <img src="#" alt="nazwa-zdjecia" class="img-fluid">
-                            </a>
-                            <h5 class="mt-2">nazwa</h5>
-                            <p>Data wydania: xxx-xx-xx</p>                    
-                            <p>inne dane</p>
-                            <button type="#" class="btn custom-btn position-absolute bottom-0 end-0 mb-3 me-3">
-                                <i class="bi bi-cart"></i>
-                            </button>
-                        </div>
-                    </div>
-            </div>
+<?php
+require_once dirname(dirname(__DIR__)) . '/include/global.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') 
+{
+  $filters = getURLfilters($site_conn);
+
+  $products = getFilteredProducts($site_conn, $filters);
+
+  if (empty($products))  //                  
+  {
+      echo "<p>Nie znaleziono produktów ;( </p>";
+  } 
+  else 
+  {
+      writeAllProducts($products);
+  }
+} 
+else if (empty($_GET))  // default values (when there are no filters)
+{
+  $products = getAllProducts($site_conn);
+
+  if (empty($products)) 
+  {
+      echo "<p>Nie znaleziono produktów ;(</p>";
+  } 
+  else 
+  {
+      writeAllProducts($products);
+  }
+}
+
+?>
+
 <!---------------------------------------------------------------------------------------------------->
     </div>
   </div>
 </div>
+
