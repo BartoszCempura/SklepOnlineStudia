@@ -65,7 +65,7 @@
                 <form action="" method="POST">
                         <div class="form-group">
                             <label class="ps-1 mb-2" for="EmailSettings">Obecny email</label>
-                            <input type="email" class="form-control mb-3" id="EmailSettings" name="email" placeholder="#" readonly>
+                            <input type="email" class="form-control mb-3" id="EmailSettings" name="email" placeholder="#" style="background-color: #e0e0e0; color: #808080;" readonly>
                             <input type="email" class="form-control mb-3" id="inputEmailSettings" name="email" placeholder="Nowy email">
                             <input type="password" class="form-control mb-3" id="inputPasswordSettings" name="password" placeholder="Potwierdź hasłem" required>
                         </div>

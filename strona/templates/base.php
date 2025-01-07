@@ -104,7 +104,7 @@
           { 
               echo '
                     <li class="d-flex justify-content-center py-2">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="ustawieniaDaneDoZamowien">
                <i class="bi bi-geo-alt me-2"></i>
                 <span>Dane do zamówień</span>
               </a>
@@ -279,7 +279,7 @@
       }
     </style>
 
-    <script src="strona/static/index1.js"></script>
+    <script src="strona/static/index3.js"></script>
   
     </body>
 
