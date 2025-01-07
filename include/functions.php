@@ -214,31 +214,36 @@ function getAllProducts($conn)
 
 function writeAllProducts($products)
 {
-    foreach ($products as $product) {
-            $image = $product['Image'];
-            $name = $product['Name'];
-            $price = $product['Price'];
+    echo "<div class='row'>";
 
-            echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-4'>                               
-                            <div class='product-container position-relative'>
-                                <a href='#' class='mx-auto'>
-                                    <img src='.//images/$image' alt='nazwa-zdjecia' class='img-fluid'>
-                                </a>
-                                <h5 class='mt-2'>$name</h5>
-                                <p>Cena: $price zł</p>                    
-                                <p>inne dane</p>
-                                <div class='d-flex position-absolute bottom-0 end-0 mb-3 me-3'>
-                                    <button type='#' class='btn btn-link me-1'>
-                                        <i class='bi bi-heart fs-5'></i>
-                                    </button>
-                                    <button type='#' class='btn custom-btn'>
-                                        <i class='bi bi-cart fs-5'></i>
-                                    </button>
-                                </div>
+    foreach ($products as $product) {
+        $image = $product['Image'];
+        $name = $product['Name'];
+        $price = $product['Price'];
+
+        echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-4'>                               
+                        <div class='product-container position-relative'>
+                            <a href='#' class='mx-auto'>
+                                <img src='./images/$image' alt='nazwa-zdjecia' class='img-fluid'>
+                            </a>
+                            <h5 class='mt-2'>$name</h5>
+                            <p>Cena: $price zł</p>                    
+                            <p>inne dane</p>
+                            <div class='d-flex position-absolute bottom-0 end-0 mb-3 me-3'>
+                                <button type='#' class='btn btn-link me-1'>
+                                    <i class='bi bi-heart fs-5'></i>
+                                </button>
+                                <button type='#' class='btn custom-btn'>
+                                    <i class='bi bi-cart fs-5'></i>
+                                </button>
                             </div>
-                        </div>";       
-                    }
+                        </div>
+                    </div>";
+    }
+
+    echo "</div>";
 }
+
 
 function getAllowedAttributes($conn)
 {

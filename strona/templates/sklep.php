@@ -2,7 +2,7 @@
   <div class="row mb-3">
     <div class="col-4"> 
       <div class="p-3 bg-light shadow-sm rounded-3">Filtry
-      <?php writeAllAttributes($site_conn); ?>
+        <?php writeAllAttributes($site_conn); ?>
       </div>
     </div>
     <div class="col-8"> 
