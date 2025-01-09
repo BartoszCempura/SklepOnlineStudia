@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous">
         
-        <link rel="stylesheet" href="strona/static/styles4.css"> 
+        <link rel="stylesheet" href="strona/static/styles.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
    <!-- <link rel="stylesheet" href="fontawesome-pro-5.15.3-web\fontawesome-pro-5.15.3-web\css\all.css"/> -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -37,9 +37,9 @@
           <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Serach bar kontener środkowy@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
           <div class="col-6 d-flex justify-content-center align-items-center">
             <div class="input-group shadow-sm" style="max-width: 450px;">
-              <span class="input-group-text" id="Wyszukaj">
-                <button class="btn p-0 border-0" style="background: none;" aria-label="Search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search hover-fill"
+              <span class="input-group-text rounded-0" id="Wyszukaj">
+                <button class="btn p-0 border-0 d-flex justify-content-center" style="background: none;" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search hover-fill"
                   viewBox="0 0 16 16">
                   <path
                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
@@ -47,14 +47,14 @@
                 </svg>
               </button>
               </span>
-              <input type="text" class="form-control" placeholder="Wyszukaj" aria-label="Wyszukaj"
+              <input type="text" class="form-control rounded-0" placeholder="Wyszukaj" aria-label="Wyszukaj"
                 aria-describedby="Wyszukaj">
             </div>
           </div>
     
           <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@IKONY PO PRAWEJ STRONIE KONTENER @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
           <div class="col-3 d-flex justify-content-center align-items-center">
-            <a class="btn btn-light" aria-label="ulubione" href="ulubione">
+            <a class="btn btn-light rounded-0" aria-label="ulubione" href="ulubione" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
               <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                 <path
                   d="M25.738 7.601a6 6 0 0 0-8.324.156L16 9.172l-1.414-1.415A6 6 0 0 0 6.1 16.243l9.545 9.546a.5.5 0 0 0 .708 0l9.546-9.546a6 6 0 0 0 0-8.486l-.162-.156zm-.395 1.02a5 5 0 0 1-.15 6.915L16 24.727l-9.192-9.193a5 5 0 1 1 7.07-7.07l1.768 1.767a.5.5 0 0 0 .708 0l1.767-1.768a5 5 0 0 1 7.071 0l.15.157z">
@@ -62,8 +62,8 @@
               </svg>
             </a>
             <div class="dropdown">
-              <button class="btn btn-light mx-5">
-            <a aria-label="panel klienta" href="konto">
+              <button class="btn btn-light rounded-0 mx-4" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
+            <a aria-label="panel klienta" href="#">
               <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                 <path
                   d="M13.1 15.79C11.772 14.51 11 12.35 11 10c0-3.5 1.875-6 5-6s5 2.5 5 6c0 2.35-.772 4.51-2.1 5.79.365.632.672 1.075.954 1.356.488.49 1.067.792 2.26 1.253l.384.148.395.153c.305.121.565.23.815.346C25.545 19.887 27 22.143 27 24.5a.5.5 0 0 1-.146.354C25.744 25.964 20.217 27 16 27c-4.216 0-9.743-1.036-10.854-2.146A.5.5 0 0 1 5 24.5c0-2.356 1.455-4.613 3.292-5.454.25-.115.51-.225.815-.346a40.51 40.51 0 0 1 .78-.301c1.192-.46 1.77-.764 2.26-1.253.281-.281.588-.724.953-1.355zm.797.62c-.377.641-.707 1.107-1.043 1.444-.617.617-1.29.97-2.608 1.478l-.385.148-.385.15c-.29.115-.535.218-.768.325-1.423.652-2.611 2.434-2.702 4.314C7.212 25.091 12.238 26 16 26c3.762 0 8.788-.909 9.994-1.73-.09-1.881-1.279-3.663-2.702-4.316a16.666 16.666 0 0 0-.768-.324 37.747 37.747 0 0 0-.385-.15l-.385-.148c-1.318-.509-1.99-.861-2.608-1.478-.336-.337-.666-.803-1.043-1.444A3.99 3.99 0 0 1 16 17a3.99 3.99 0 0 1-2.103-.59zM16 5c-2.5 0-4 2-4 5 0 3.26 1.644 6 4 6s4-2.74 4-6c0-3-1.5-5-4-5z">
@@ -77,16 +77,12 @@
         require_once("./include/functions.php");
         if(!authorisedUser())
         {
-          echo '<li class="d-flex justify-content-center pb-2 border-bottom">
-              <button class="w-100">
-                <a class="dropdown-item" href="logowanie">Login</a>
-              </button>
-              </li>
-            <li class="d-flex justify-content-center py-2 border-bottom">
-              <button class="w-100">
-                <a class="dropdown-item" href="rejestracja">Sign Up</a>
-              </button>
-            </li>
+          echo '<li class="pb-2 border-bottom text-center">              
+                  <a class="dropdown-item" href="logowanie">Login</a>             
+                </li>
+                <li class="py-2 border-bottom text-center">          
+                  <a class="dropdown-item" href="rejestracja">Sign Up</a>
+                </li>
             <li class="d-flex justify-content-center py-2">
               <a class="dropdown-item" href="logowanie">
                <i class="bi bi-geo-alt me-2"></i>
@@ -115,8 +111,8 @@
                   <span>Ustawienia konta</span>
                 </a>
             </li>
-            <li class="d-flex justify-content-center pt-2 border-top">
-                <a class="dropdown-item text-center" href="include/logout.php">Log out</a>
+            <li class="pt-2 border-top text-center">
+                <a class="dropdown-item" href="include/logout.php">Log out</a>
             </li>'
                     ;
           }
@@ -126,7 +122,7 @@
           </ul>
           </div>
           <!---------------------------------------------------------------------------------------------------------------------->
-            <a class="btn btn-light" aria-label="koszyk" href="koszyk">
+            <a class="btn btn-light rounded-0" aria-label="koszyk" href="koszyk" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
               <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                 <path fill-rule="evenodd"
                   d="M22 21a3 3 0 1 1-2.236 1h-5.528a3 3 0 1 1-2.844-.938L8.098 6H4.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .488.393L9.558 8H25.5a.5.5 0 0 1 .488.608l-2 9A.5.5 0 0 1 23.5 18H11.746l.656 3H22zm2.877-12l-1.778 8H11.527l-1.75-8h15.1zM12 22a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 2a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
@@ -142,17 +138,18 @@
 
     <div class="bg-light shadow-sm">
       <div class="container-fluid border-top border-bottom">
-        <div class="row justify-content-center">
+        <div class="container">
+        <div class="row justify-content-evenly">
           <div class="col-auto">
             <!-- Dropdown Button -->
             <div class="dropdown">
-              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonKomputer"
+              <button class="btn btn-light rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonKomputer"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <b>Komputery</b>
               </button>
     
               <!-- Dropdown Menu -->
-              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButtonKomputer">
+              <ul class="dropdown-menu dropdown-menu-start rounded-0" aria-labelledby="dropdownMenuButtonKomputer">
                 <li><a class="dropdown-item" href="sklep?Category=Laptop">Laptop</a></li>
                 <li><a class="dropdown-item" href="sklep?Category=PC">PC</a></li>
                 <li><a class="dropdown-item" href="sklep?Category=AIO">AIO</a></li>
@@ -165,13 +162,13 @@
           <div class="col-auto">
             <!-- Dropdown Button -->
             <div class="dropdown">
-              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonAkcesoria"
+              <button class="btn btn-light rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonAkcesoria"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <b>Akcesoria</b>
               </button>
     
               <!-- Dropdown Menu -->
-              <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButtonAkcesoria">
+              <ul class="dropdown-menu dropdown-menu-start rounded-0" aria-labelledby="dropdownMenuButtonAkcesoria">
                 <li><a class="dropdown-item" href="sklep?Category=Monitory">Monitor</a></li>
                 <li><a class="dropdown-item" href="sklep?Category=Mysze">Mysz</a></li>
                 <li><a class="dropdown-item" href="sklep?Category=Klawiatury">Klawiatura</a></li>
@@ -184,7 +181,7 @@
     
           <div class="col-auto">
             <a class="" aria-label="nav_wyprzedaz" href="">
-              <button class="btn btn-light mx-5 rounded-0 text-hover"><b>Wyprzedaż</b></button>
+              <button class="btn btn-light rounded-0 text-hover" id="dropdownMenuButtonWyprzedaz"><b>Wyprzedaż</b></button>
             </a>
           </div>
     
@@ -192,12 +189,12 @@
           <div class="col-auto">
 
             <div class="dropdown">
-              <button class="btn btn-light mx-5 rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButton"
+              <button class="btn btn-light rounded-0 text-hover dropdown-toggle" type="button" id="dropdownMenuButtonPromocje"
               data-bs-toggle="dropdown" aria-expanded="false">
               <b>Promocje i nowości</b>
             </button>
 
-            <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButton">
+            <ul class="dropdown-menu dropdown-menu-start rounded-0" aria-labelledby="dropdownMenuButtonPromocje">
             <li><a class="dropdown-item" href="#">Promocje</a></li>
             <li><a class="dropdown-item" href="#">Nowości</a></li>
             <li><a class="dropdown-item" href="#">Karty podarunkowe</a></li>
@@ -206,6 +203,7 @@
       </div>
           
           </div>
+        </div>
         </div>
       </div>
     </div>

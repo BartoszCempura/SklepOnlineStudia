@@ -1,5 +1,5 @@
 <h2 align="center" class="mt-4">Ustawienia konta</h2>
-<div class="container mt-4 mb-4 border shadow p-3 w-25">
+<div class="container mt-4 mb-4 border shadow p-3 w-25" style="caret-color: transparent;">
     <?php raiseMessageAndRedirect("ustawieniaKonta.php"); ?>
     <h3 class="mb-3">Dane konta</h3>
     <p class="mb-2">Twoje dane</p>
@@ -49,13 +49,13 @@
 
     <h3 class="mb-3">Usuwanie konta</h3>
     <p class="mb-3">Jeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na pewno chcesz to zrobić – Twojego konta nie będziemy mogli przywrócić.</p>
-    <button type="button" class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#modal4">Usuń konto</button>
+    <button type="button" class="btn custom-btn rounded-0" data-bs-toggle="modal" data-bs-target="#modal4">Usuń konto</button>
 </div>
 
 <!-- pierwsze okno zmiany danych-->
 <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content rounded-0">
             <div class="modal-header">
                 <h5 style="caret-color: transparent;" class="modal-title" id="modal1Label">Edytuj dane konta</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -63,13 +63,13 @@
             <div class="modal-body">
                 <form action="include\updateUserPersonalData.php" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control mb-3" id="inputNameSettings" name="name" placeholder="Imię" pattern="[a-zA-Z]+">
-                            <input type="text" class="form-control" id="inputSurnameSettings" name="surname" placeholder="Nazwisko" pattern="[a-zA-Z]+">
+                            <input type="text" class="form-control rounded-0 mb-3" id="inputNameSettings" name="name" placeholder="Imię" pattern="[a-zA-Z]+">
+                            <input type="text" class="form-control rounded-0" id="inputSurnameSettings" name="surname" placeholder="Nazwisko" pattern="[a-zA-Z]+">
                             <label  class="ps-1 my-2" for="inputPhoneSettings">Numer telefonu</label>
-                            <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control mb-3" id="inputPhoneSettings" name="phoneNumber" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
+                            <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0 mb-3" id="inputPhoneSettings" name="phoneNumber" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
                         </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="submit" class="btn custom-btn">Zapisz zmiany</button>
+                        <div class="modal-footer d-flex align-items-center justify-content-center">
+                            <button type="submit" class="btn custom-btn rounded-0">Zapisz zmiany</button>
                         </div>                  
                 </form>
             </div>
@@ -80,7 +80,7 @@
 <!-- drugie okno zmiany danych-->
 <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content rounded-0">
             <div class="modal-header">
                 <h5 style="caret-color: transparent;" class="modal-title" id="modal2Label">Zmiana adresu email</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -89,12 +89,12 @@
                 <form action="include\updateUserEmail.php" method="POST">
                         <div class="form-group">
                             <label class="ps-1 mb-2" for="EmailSettings">Obecny email</label>
-                            <input type="email" class="form-control mb-3" id="EmailSettings" name="email" placeholder=<?php echo $email?> style="background-color: #e0e0e0; color: #808080;" readonly>
-                            <input type="email" class="form-control mb-3" id="inputEmailSettings" name="email" placeholder="Nowy email">
-                            <input type="password" class="form-control mb-3" id="inputPasswordSettings" name="password" placeholder="Potwierdź hasłem" required>
+                            <input type="email" class="form-control rounded-0 mb-3" id="EmailSettings" name="email" placeholder=<?php echo $email?> style="background-color: #e0e0e0; color: #808080;" readonly>
+                            <input type="email" class="form-control rounded-0 mb-3" id="inputEmailSettings" name="email" placeholder="Nowy email">
+                            <input type="password" class="form-control rounded-0 mb-3" id="inputPasswordSettings" name="password" placeholder="Potwierdź hasłem" required>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
-                            <button type="submit" class="btn custom-btn">Zapisz zmiany</button>
+                            <button type="submit" class="btn custom-btn rounded-0">Zapisz zmiany</button>
                         </div>
                 </form>
             </div>
@@ -105,7 +105,7 @@
 <!-- trzecie okno zmiany danych-->
 <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content rounded-0">
             <div class="modal-header">
                 <h5 style="caret-color: transparent;" class="modal-title" id="modal3Label">Edytuj dane konta</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -113,12 +113,12 @@
             <div class="modal-body">
                 <form action="include\updateUserPassword.php" method="POST">
                         <div class="form-group">
-                            <input type="password" class="form-control mb-3" id="inputOldPasswordSettings" name="Oldpassword" placeholder="Stare hasło" required>
-                            <input type="password" class="form-control mb-3" id="inputNewPasswordSettings" name="Newpassword" placeholder="Nowe hasło" required>
-                            <input type="password" class="form-control mb-3" id="inputNewPasswordConfirmSettings" name="NewpasswordConfirm" placeholder="Powtórz nowe hasło" required>
+                            <input type="password" class="form-control rounded-0 mb-3" id="inputOldPasswordSettings" name="Oldpassword" placeholder="Stare hasło" required>
+                            <input type="password" class="form-control rounded-0 mb-3" id="inputNewPasswordSettings" name="Newpassword" placeholder="Nowe hasło" required>
+                            <input type="password" class="form-control rounded-0 mb-3" id="inputNewPasswordConfirmSettings" name="NewpasswordConfirm" placeholder="Powtórz nowe hasło" required>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
-                            <button type="submit" class="btn custom-btn">Zapisz zmiany</button>
+                            <button type="submit" class="btn custom-btn rounded-0">Zapisz zmiany</button>
                         </div>
                 </form>
             </div>
@@ -129,20 +129,20 @@
 <!-- komunikat przy usówaniu konta -->
 <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content rounded-0">
             <div class="modal-header">
                 <h4 style="caret-color: transparent;" class="modal-title" id="modal4Label">Czy na pewno?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="mb-0">Wykonywana czynnośc jest <strong>nieodwracalna!</strong></p>
+                <p class="mb-0">Wykonywana czynność jest <strong>nieodwracalna!</strong></p>
             </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cofnij</button>
+                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cofnij</button>
                         <?php 
                         $directory = "include\deleteUser.php";
                         echo "<form method='post' action='$directory'>
-                                <button type='submit' class='btn btn-danger'>Tak, usuń</button>
+                                <button type='submit' class='btn btn-danger rounded-0'>Tak, usuń</button>
                               </form>"
                         ?>
                     </div>

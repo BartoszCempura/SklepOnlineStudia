@@ -1,6 +1,3 @@
-.test{
-    background-color: red;
-}
 .hover-fill:hover {
     fill: #5e31f9;
 }
@@ -43,18 +40,35 @@
 }
 
 .dropdown-item:hover  {
-    color: #f0f0f0 ; /* Text color */
+    color: white; /* Text color */
     background-color: #7b6dfa; /* Example background color on hover */
 }
 
 .dropdown {
-    position: relative; /* Set the parent element to relative positioning */
+    /* position: relative;  Set the parent element to relative positioning */
   }
 
+  #dropdownMenuButtonKomputer:hover {
+    background-color: white !important;
+    border-bottom: none !important;
+}
+
+  #dropdownMenuButtonAkcesoria:hover {
+    background-color: white !important;
+    border-bottom: none !important;
+  }
+
+  #dropdownMenuButtonWyprzedaz:hover {
+    background-color: white !important;
+  }
+
+  #dropdownMenuButtonPromocje:hover {
+    background-color: white !important;
+    border-bottom: none !important;
+  }
+
+
   .dropdown-menu {
-    position: absolute;
-    left: 50%; /* Move the dropdown menu to the center horizontally */
-    transform: translateX(-50%); /* Adjust the dropdown so it's truly centered */
     display: none; /* Hide the dropdown menu by default */
     opacity: 0; /* Make it invisible */
     visibility: hidden;
@@ -102,16 +116,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 20px;
   border: 1px solid #ddd;
-  border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .product-container img {
   max-width: 100%;
   height: auto;
-  border-radius: 5px;
 }

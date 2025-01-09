@@ -196,7 +196,7 @@ function writeAllAttributes($conn)
 
     if (!empty($filters)) 
     {
-        echo "<form method='GET'>";
+        echo "<form class='px-2' method='GET'>";
 
         if (isset($_GET['Category'])) 
         {
@@ -210,12 +210,14 @@ function writeAllAttributes($conn)
             {
                 $checked = (isset($_GET[$attribute]) && in_array($value, $_GET[$attribute])) ? 'checked' : '';
 
-                echo "<label>
-                        <input type='checkbox' name='{$attribute}[]' value='$value' $checked> $value
-                    </label><br>";
+                echo "<input class='form-check-input mb-2' type='checkbox' name='{$attribute}[]' value='$value' $checked> $value
+                    <br>";
             }
         }
-        echo "<button type='submit'>Filter</button>";
+        echo "
+        <div class='d-flex justify-content-center'>
+        <button type='submit' class='btn custom-btn rounded-0 my-2 w-100'>Pokaż wyniki filtrowania</button>
+        </div>";
         echo "</form>";
     }
     else 
@@ -249,24 +251,36 @@ function writeAllProducts($products)
         $name = $product['Name'];
         $price = $product['Price'];
 
-        echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-4'>                               
-                        <div class='product-container position-relative'>
-                            <a href='#' class='mx-auto'>
-                                <img src='./images/$image' alt='nazwa-zdjecia' class='img-fluid'>
-                            </a>
-                            <h5 class='mt-2'>$name</h5>
-                            <p>Cena: $price zł</p>                    
-                            <p>inne dane</p>
-                            <div class='d-flex position-absolute bottom-0 end-0 mb-3 me-3'>
-                                <button type='#' class='btn btn-link me-1'>
-                                    <i class='bi bi-heart fs-5'></i>
-                                </button>
-                                <button type='#' class='btn custom-btn'>
-                                    <i class='bi bi-cart fs-5'></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>";
+    echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-4'>
+    <div class='product-container' style='background-color: white; height: 400px;'>      
+        <!-- Image container at the top -->
+        <a href='#' class='mx-auto' style='flex-shrink: 0; height: 200px;'>
+            <img src='./images/$image' alt='nazwa-zdjecia' class='img-fluid' style='object-fit: cover; width: 100%; height: 100%;'>
+        </a>       
+        <!-- Content section for name and other details -->
+        <div class='px-3' style='flex-grow: 1;'>
+            <div style='text-align: center;'>
+                <h5>$name</h5>
+            </div>
+            <p>inne dane</p>
+        </div>       
+        <!-- Footer section with price and buttons -->
+        <div class='d-flex justify-content-evenly align-items-center mb-2'>
+            <p class='mt-2 fs-5'><strong>$price zł</strong></p>
+    
+            <div class='d-flex'>
+                <button type='#' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
+                    <i class='bi bi-heart fs-3'></i>
+                </button>
+                <button type='#' class='btn custom-btn rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center;'>
+                    <i class='bi bi-cart fs-5'></i>
+                </button> 
+            </div>
+        </div>
+    </div>
+</div>
+
+";
     }
 
     echo "</div>";

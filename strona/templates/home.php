@@ -1,5 +1,5 @@
 
-<div id="carouselExampleIndicators" class="carousel slide shadow" data-bs-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide shadow mt-1" data-bs-ride="carousel">
     
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -44,35 +44,34 @@
     </button>
 </div>
 
-<div class="container-fluid mt-4">
+<div class="container-fluid my-4">
   <!-- First Row -->
   <div class="row mb-3">
     <div class="col-4"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">Pierwszy rząd, pierwsza kolumna</div>
+      <div class="p-3 bg-light shadow-sm rounded-0">Pierwszy rząd, pierwsza kolumna</div>
     </div>
     <div class="col-8"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">Pierwszy rząd, druga kolumna</div>
+      <div class="p-3 bg-light shadow-sm rounded-0">Pierwszy rząd, druga kolumna</div>
     </div>
   </div>
 
   <!-- Second Row -->
   <div class="row mb-3">
     <div class="col-12">
-      <div class="p-3 bg-light shadow-sm rounded-3">Drugi rząd</div>
+      <div class="p-3 bg-light shadow-sm rounded-0">Drugi rząd</div>
     </div>
   </div>
 
   <!-- Third Row -->
   <div class="row">
     <div class="col-4"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">trzeci rząd, pierwsza kolumna</div>
+      <div class="p-3 bg-light shadow-sm rounded-0">trzeci rząd, pierwsza kolumna</div>
     </div>
     <div class="col-8"> 
-      <div class="p-3 bg-light shadow-sm rounded-3">trzeci rząd, druga kolumna</div>
+      <div class="p-3 bg-light shadow-sm rounded-0">trzeci rząd, druga kolumna</div>
     </div>
   </div>
 </div>
-
 
 
 
