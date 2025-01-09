@@ -34,11 +34,12 @@
             </a>
           </div>
     
-          <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Serach bar kontener środkowy@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+          <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Serach bar kontener środkowy@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --> 
           <div class="col-6 d-flex justify-content-center align-items-center">
+          <form action="include\search.php" method="POST">
             <div class="input-group shadow-sm" style="max-width: 450px;">
               <span class="input-group-text rounded-0" id="Wyszukaj">
-                <button class="btn p-0 border-0 d-flex justify-content-center" style="background: none;" aria-label="Search">
+              <button class="btn p-0 border-0 d-flex justify-content-center" style="background: none;" aria-label="Search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search hover-fill"
                   viewBox="0 0 16 16">
                   <path
@@ -47,10 +48,11 @@
                 </svg>
               </button>
               </span>
-              <input type="text" class="form-control rounded-0" placeholder="Wyszukaj" aria-label="Wyszukaj"
+              <input type="text" class="form-control rounded-0" name="searchInput" placeholder="Wyszukaj" aria-label="Wyszukaj"
                 aria-describedby="Wyszukaj">
+              </div>
+              </form>
             </div>
-          </div>
     
           <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@IKONY PO PRAWEJ STRONIE KONTENER @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
           <div class="col-3 d-flex justify-content-center align-items-center">

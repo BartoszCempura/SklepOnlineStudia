@@ -7,25 +7,32 @@
         <button type="button" class="btn btn-link position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal1">Edytuj</button>
 
         <?php 
-            
             require_once dirname(dirname(__DIR__)) . '/include/global.php';
-
-            $user = getUser($client_conn, $_SESSION['login']) ;
-            if($user === false)
+            if(isset($_SESSION['login']))
+            {
+                $user = getUser($client_conn, $_SESSION['login']) ;
+                if($user === false)
+                {
+                    $name = "Brak";
+                    $surname = "Brak";
+                    $phoneNumber = "Brak";
+                    $email = "Brak";
+                }
+                else
+                {
+                    $name = $user['First_Name'];
+                    $surname = $user['Last_Name'];
+                    $phoneNumber = $user['Phone_Number'];
+                    $email = $user['Email'];
+                }
+            }
+            else
             {
                 $name = "Brak";
                 $surname = "Brak";
                 $phoneNumber = "Brak";
                 $email = "Brak";
             }
-            else
-            {
-                $name = $user['First_Name'];
-                $surname = $user['Last_Name'];
-                $phoneNumber = $user['Phone_Number'];
-                $email = $user['Email'];
-            }
-
         ?>
 
         <p class="fw-bold mb-0"><?php echo $name ." ". $surname?></p>
@@ -46,10 +53,21 @@
     <button type="button" class="btn btn-link position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal3">Edytuj</button>
         <p class="fw-bold mb-0">••••••••</p>
     </div>
-
-    <h3 class="mb-3">Usuwanie konta</h3>
-    <p class="mb-3">Jeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na pewno chcesz to zrobić – Twojego konta nie będziemy mogli przywrócić.</p>
-    <button type="button" class="btn custom-btn rounded-0" data-bs-toggle="modal" data-bs-target="#modal4">Usuń konto</button>
+<?php 
+    if(isset($_SESSION['ID']))
+    {
+        echo    '<h3 class="mb-3">Usuwanie konta</h3>
+                <p class="mb-3">Jeśli klikniesz w ten przycisk, usuniesz swoje konto w naszym sklepie. Upewnij się, że na pewno chcesz to zrobić – Twojego konta nie będziemy mogli przywrócić.</p>
+                <button type="button" class="btn custom-btn rounded-0" data-bs-toggle="modal" data-bs-target="#modal4">Usuń konto</button>';
+    }
+    else
+    {
+        echo    '<p class="mb-3">Żeby móc zmienić dane osobiste muszisz być zalogowany.</p>
+                <a href="logowanie">
+                    <button type="button" class="btn custom-btn rounded-0" data-bs-toggle="modal" data-bs-target="#modal4">Zaloguj</button>
+                </a>';
+    }
+?>
 </div>
 
 <!-- pierwsze okno zmiany danych-->
@@ -63,10 +81,10 @@
             <div class="modal-body">
                 <form action="include\updateUserPersonalData.php" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control rounded-0 mb-3" id="inputNameSettings" name="name" placeholder="Imię" pattern="[a-zA-Z]+">
-                            <input type="text" class="form-control rounded-0" id="inputSurnameSettings" name="surname" placeholder="Nazwisko" pattern="[a-zA-Z]+">
+                            <input type="text" class="form-control rounded-0 mb-3" id="inputNameSettings" name="name" value=<?php echo $name?> placeholder="Imię" pattern="[a-zA-Z]+">
+                            <input type="text" class="form-control rounded-0" id="inputSurnameSettings" name="surname" value=<?php echo $surname?>  placeholder="Nazwisko" pattern="[a-zA-Z]+">
                             <label  class="ps-1 my-2" for="inputPhoneSettings">Numer telefonu</label>
-                            <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0 mb-3" id="inputPhoneSettings" name="phoneNumber" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
+                            <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0 mb-3" id="inputPhoneSettings" name="phoneNumber" value=<?php echo $phoneNumber?> placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
                         </div>
                         <div class="modal-footer d-flex align-items-center justify-content-center">
                             <button type="submit" class="btn custom-btn rounded-0">Zapisz zmiany</button>

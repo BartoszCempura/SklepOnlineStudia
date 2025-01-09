@@ -135,6 +135,26 @@ function loginUser($conn, $login, $password)
     }
 }
 
+function getProduct($conn, $id)
+{
+    $sql = "SELECT * FROM sitedb.product
+            WHERE sitedb.product.ID = ?
+            ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
+    $stmt->close();
+
+    if($product)
+    {
+        return $product;
+    }
+    else return 0;
+}
 
 function getAllAttributes($conn)
 {
@@ -150,6 +170,49 @@ function getAllAttributes($conn)
         return $attributes;
     }
 }
+
+function getTechData($conn, $id)
+{
+    $sql = "
+        SELECT a.Name AS AttributeName, pa.Value
+        FROM sitedb.product_attribute pa
+        JOIN sitedb.attribute a ON pa.AttributeID = a.ID
+        WHERE (pa.ProductID = ?)
+        GROUP BY a.Name, pa.Value
+        ORDER BY a.Name, pa.Value;
+    ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $data = [];
+    if ($result->num_rows > 0) 
+    {
+        while ($row = $result->fetch_assoc()) 
+        {
+            $data[$row['AttributeName']][] = $row['Value'];
+        }
+    }
+
+    return $data; // 2d array of attributes with array of distinct values inside 
+}
+
+function writeTechData($conn, $id) 
+{
+    $data = getTechData($conn, $id);
+
+    foreach ($data as $attribute => $values) 
+        {
+            foreach ($values as $value) 
+            {
+                echo "<h3>{$attribute}</h3>
+                      <p>$value</p>"; 
+            }
+        }
+}
+
 
 function getFilters($conn, $category)
 {
@@ -247,6 +310,7 @@ function writeAllProducts($products)
     echo "<div class='row'>";
 
     foreach ($products as $product) {
+        $id = $product['ID'];
         $image = $product['Image'];
         $name = $product['Name'];
         $price = $product['Price'];
@@ -254,7 +318,7 @@ function writeAllProducts($products)
     echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-4'>
     <div class='product-container' style='background-color: white; height: 400px;'>      
         <!-- Image container at the top -->
-        <a href='#' class='mx-auto' style='flex-shrink: 0; height: 200px;'>
+        <a href='produktDane?id=$id' class='mx-auto' style='flex-shrink: 0; height: 200px;'>
             <img src='./images/$image' alt='nazwa-zdjecia' class='img-fluid' style='object-fit: cover; width: 100%; height: 100%;'>
         </a>       
         <!-- Content section for name and other details -->
@@ -400,8 +464,22 @@ function getFilteredProducts($site_conn, $filters)
     return $products;
 }
 
-function deleteUser($conn)
+function searchProducts($conn, $searchInput)
 {
+    $searchInput = "%" . $searchInput . "%";
 
+    $sql = "SELECT * FROM sitedb.product
+            WHERE sitedb.product.Name LIKE ?
+            ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $searchInput);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    $products = $result->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
+    return $products;
 }
 ?>

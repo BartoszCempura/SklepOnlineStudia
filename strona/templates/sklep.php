@@ -14,32 +14,35 @@
 
             if ($_SERVER['REQUEST_METHOD'] === 'GET') 
             {
-              $filters = getURLfilters($site_conn);
-
-              $products = getFilteredProducts($site_conn, $filters);
-
-              if (empty($products))  //                  
-              {
-                  echo "<p>Nie znaleziono produktów ;( </p>";
+                if (!empty($_GET['input'])) 
+                {
+                  $searchInput = trim(filter_var($_GET['input'], FILTER_SANITIZE_SPECIAL_CHARS));
+                  $products = searchProducts($site_conn, $searchInput);
+        
+                  if (empty($products)) 
+                  {
+                      echo "<p>Nie znaleziono produktów ;(</p>";
+                  } 
+                  else 
+                  {
+                      writeAllProducts($products);
+                  }
               } 
               else 
               {
-                  writeAllProducts($products);
+                  $filters = getURLfilters($site_conn);
+                  $products = getFilteredProducts($site_conn, $filters);
+          
+                  if (empty($products)) 
+                  {
+                      echo "<p>Nie znaleziono produktów ;(</p>";
+                  } 
+                  else 
+                  {
+                      writeAllProducts($products);
+                  }
               }
-            } 
-            else if (empty($_GET))  // default values (when there are no filters)
-            {
-              $products = getAllProducts($site_conn);
-
-              if (empty($products)) 
-              {
-                  echo "<p>Nie znaleziono produktów ;(</p>";
-              } 
-              else 
-              {
-                  writeAllProducts($products);
-              }
-            }
+          }
 
             ?>
 
