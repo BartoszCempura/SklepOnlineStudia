@@ -1,7 +1,7 @@
 <?php
 function authorisedUser(){
     if(isset($_SESSION['ID'])){
-        return true;
+        return $_SESSION['ID'];
     }
     return false;
 }
@@ -22,7 +22,7 @@ function handleUser($content){
 }
 */
 
-function loginTaken($conn, $login){
+function getUser($conn, $login){
     $sql = "SELECT * FROM `User` WHERE login = ?";
     $stmt = mysqli_stmt_init($conn);
 
@@ -97,6 +97,12 @@ function raiseMessageAndRedirect($redirectURL)
                   </div>';
             header("Refresh: 1; URL=$redirectURL");
         }
+        if($_GET['error'] === 'changenone')
+        {
+            echo '<div class="alert alert-success" role="alert">
+                    Dane zostały zmienione!
+                  </div>';
+        }
     }
 }
 
@@ -112,6 +118,7 @@ function loginUser($conn, $login, $password)
     {  
     if (password_verify($password, $row['Password'])) {
         $_SESSION['ID'] = $row['ID'];
+        $_SESSION['login'] = $row['Login'];
         header("Location: ../logowanie?error=loginnone");
         exit();
     } 
@@ -144,17 +151,23 @@ function getAllAttributes($conn)
     }
 }
 
-function getFilters($conn)
+function getFilters($conn, $category)
 {
     $sql = "
         SELECT a.Name AS AttributeName, pa.Value
         FROM sitedb.product_attribute pa
         JOIN sitedb.attribute a ON pa.AttributeID = a.ID
+        JOIN sitedb.product p ON pa.ProductID = p.ID
+        JOIN sitedb.Category c ON p.CategoryID = c.ID
+        WHERE (? IS NULL OR c.Name = ?)
         GROUP BY a.Name, pa.Value
         ORDER BY a.Name, pa.Value;
     ";
 
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ss', $category, $category);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $filters = [];
     if ($result->num_rows > 0) 
@@ -170,11 +183,26 @@ function getFilters($conn)
 
 function writeAllAttributes($conn)
 {
-    $filters = getFilters($conn);
+    if (isset($_GET['Category'])) 
+        {
+            $category = htmlspecialchars($_GET['Category']);
+        }
+        else
+        {
+            $category = null;
+        }
+
+    $filters = getFilters($conn, $category);
 
     if (!empty($filters)) 
     {
         echo "<form method='GET'>";
+
+        if (isset($_GET['Category'])) 
+        {
+            echo "<input type='hidden' name='Category' value='$category'>"; // adding category parameter to url by sending hidden input via form
+        }
+
         foreach ($filters as $attribute => $values) 
         {
             echo "<h5>$attribute</h5>";
@@ -270,27 +298,46 @@ function getURLfilters($conn)
                 $filters[$key] = is_array($values) ? $values : [$values];
             }
         }
+        if (isset($_GET['Category'])) {
+            $filters['Category'] = [$_GET['Category']];
+        }
         return $filters;
     }
     return [];
 }
 
+
 function getFilteredProducts($site_conn, $filters) 
 {
-    //DEFAULT QUERY
+    //CATEGORISED QUERY
     $sql = "                            
-        SELECT DISTINCT p.* 
-        FROM sitedb.Product p
-        WHERE 1=1
+    SELECT DISTINCT p.* 
+    FROM sitedb.Product p 
+    INNER JOIN sitedb.Category c ON p.CategoryID = c.ID
+    WHERE 1=1
     ";
 
+    if (isset($filters['Category'])) 
+    {
+        $sql .= " AND c.Name = ?";
+        $params[] = $filters['Category'][0]; // value of the category
+        $types = "s";
+    } 
+    else 
+    {
+        $params = [];
+        $types = "";
+    }
+
     $conditions = [];
-    $params = [];
-    $types = "";
+    
 
     foreach ($filters as $key => $values) 
     {
-        // Создаем плейсхолдеры для значений
+        if ($key === 'Category') {
+            continue;
+        }
+
         $placeholders = implode(',', array_fill(0, count($values), '?')); // number of ? signs from 0 to num of attribute VALUES!!
 
         // subquery for the specific attribute  
@@ -337,5 +384,10 @@ function getFilteredProducts($site_conn, $filters)
     $stmt->close();
 
     return $products;
+}
+
+function deleteUser($conn)
+{
+
 }
 ?>

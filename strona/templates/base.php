@@ -153,11 +153,11 @@
     
               <!-- Dropdown Menu -->
               <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButtonKomputer">
-                <li><a class="dropdown-item" href="#">Laptop</a></li>
-                <li><a class="dropdown-item" href="#">PC</a></li>
-                <li><a class="dropdown-item" href="#">AIO</a></li>
-                <li><a class="dropdown-item" href="#">Tablet</a></li>
-                <li><a class="dropdown-item" href="#">Smartphone</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Laptop">Laptop</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=PC">PC</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=AIO">AIO</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Tablety">Tablet</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Smartphones">Smartphone</a></li>
               </ul>
             </div>
           </div>
@@ -172,11 +172,11 @@
     
               <!-- Dropdown Menu -->
               <ul class="dropdown-menu rounded-0" aria-labelledby="dropdownMenuButtonAkcesoria">
-                <li><a class="dropdown-item" href="#">Monitor</a></li>
-                <li><a class="dropdown-item" href="#">Mysz</a></li>
-                <li><a class="dropdown-item" href="#">Klawiatura</a></li>
-                <li><a class="dropdown-item" href="#">Kontroler</a></li>
-                <li><a class="dropdown-item" href="#">Kable</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Monitory">Monitor</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Mysze">Mysz</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Klawiatury">Klawiatura</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Kontrolery">Kontroler</a></li>
+                <li><a class="dropdown-item" href="sklep?Category=Kable">Kable</a></li>
               </ul>
             </div>
           </div>
