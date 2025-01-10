@@ -1,4 +1,4 @@
-<h2 align="center" class="mt-4">Twoj koszyk (ilosc #)</h2>
+<h2 align="center" class="mt-4">Dostawa i Płatność</h2>
 <div class="container my-4">
     <div class="row mb-3">
         <!-- pojemnik na obiekty dodane do koszyka -->
@@ -38,30 +38,9 @@
                         <p class="mt-3 p-0">Do zapłoaty</p>
                         <p class="mt-2 p-0 fs-4"><strong>4.599 zł</strong></p>
                     </div>
-                    <a href="DostawaPlatnosc" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
-                    Dalej
-                    </a>
+                    <button class="btn custom-btn rounded-0 w-100 mb-1" style="caret-color: transparent;">Dalej</button>
                     <button class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#modal" style="caret-color: transparent;">Oblicz rate</button>
                 </div>
             </div>
-    </div>
-</div>
-
-<!-- komunikat przy usówaniu konta -->
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-0">
-            <div class="modal-header">
-                <h4 style="caret-color: transparent;" class="modal-title" id="modalLabel">Oblicz ratę</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex justify-content-center">
-                <p class="mb-0">tutaj będzie jakiś sówaczek</p>
-            </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Zamknij</button>
-                    </div>
-            </div>
-        </div>
     </div>
 </div>

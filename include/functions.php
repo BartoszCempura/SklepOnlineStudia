@@ -317,18 +317,18 @@ function writeAllProducts($products)
 
     echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-4'>
     <div class='product-container' style='background-color: white; height: 400px;'>      
-        <!-- Image container at the top -->
+        <!-- kontener na zdjęcie produktu -->
         <a href='produktDane?id=$id' class='mx-auto' style='flex-shrink: 0; height: 200px;'>
             <img src='./images/$image' alt='nazwa-zdjecia' class='img-fluid' style='object-fit: cover; width: 100%; height: 100%;'>
         </a>       
-        <!-- Content section for name and other details -->
+        <!-- informacje na temat produktu  -->
         <div class='px-3' style='flex-grow: 1;'>
             <div style='text-align: center;'>
                 <h5>$name</h5>
             </div>
             <p>inne dane</p>
         </div>       
-        <!-- Footer section with price and buttons -->
+        <!-- footer z przyciskami i ceną -->
         <div class='d-flex justify-content-evenly align-items-center mb-2'>
             <p class='mt-2 fs-5'><strong>$price zł</strong></p>
     
