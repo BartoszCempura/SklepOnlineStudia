@@ -2,8 +2,16 @@
   <div class="row mb-3">
     <div class="col-4"> 
       <div class="py-2 bg-light shadow-sm rounded-0">
-      <h4 class="border-bottom pb-2 ps-2"><strong>Filtry</strong></h4>
-        <?php writeAllAttributes($site_conn); ?>
+        <?php
+        if(empty($_GET['Category']))
+        {
+          writeAllCategories($site_conn);
+        } 
+        else
+        {
+          writeAllAttributes($site_conn);  
+        }
+        ?>
       </div>
     </div>
     <div class="col-8"> 
@@ -17,8 +25,12 @@
                 if (!empty($_GET['input'])) 
                 {
                   $searchInput = trim(filter_var($_GET['input'], FILTER_SANITIZE_SPECIAL_CHARS));
-                  $products = searchProducts($site_conn, $searchInput);
-        
+                  $productsSearched = searchProducts($site_conn, $searchInput);
+
+                  $filters = getURLfilters($site_conn);
+                  $productsFiltered = getFilteredProducts($site_conn, $filters);
+                  
+                  $products = findCommon($productsFiltered, $productsSearched);
                   if (empty($products)) 
                   {
                       echo "<p>Nie znaleziono produktów ;(</p>";

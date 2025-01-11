@@ -25,23 +25,53 @@ function handleUser($content){
 function getUser($conn, $login){
     $sql = "SELECT * FROM `User` WHERE login = ?";
     $stmt = mysqli_stmt_init($conn);
-
+    
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../rejestracja?error=stmtfailed");
         exit();
     }
-
+    
     mysqli_stmt_bind_param($stmt, "s", $login);
     mysqli_stmt_execute($stmt);
-
+    
     $result = mysqli_stmt_get_result($stmt);
-
+    
     // Если нашли пользователя
     if ($row = mysqli_fetch_assoc($result)) {
         return $row;
     } else {
         return false;
     }
+}
+
+function getUserAddress($conn, $login)
+{
+    $sql = "SELECT * FROM clientdb.address
+            JOIN clientdb.user ON clientdb.user.ID = clientdb.address.UserID
+            WHERE clientdb.user.Login = ? AND clientdb.address.Type = 'shipping'";
+    
+    $query = $conn->prepare($sql);
+    $query->bind_param('s', $login);
+    $query->execute();
+
+    $result = $query->get_result();
+    $address = $result->fetch_assoc();
+    return $address;
+}
+
+function getBillingAddress($conn, $login)
+{
+    $sql = "SELECT * FROM clientdb.address
+            JOIN clientdb.user ON clientdb.user.ID = clientdb.address.UserID
+            WHERE clientdb.user.Login = ? AND clientdb.address.Type = 'billing'";
+    
+    $query = $conn->prepare($sql);
+    $query->bind_param('s', $login);
+    $query->execute();
+
+    $result = $query->get_result();
+    $address = $result->fetch_assoc();
+    return $address;
 }
 
 function passwordsDontMatch($password, $repeatPassword)
@@ -156,6 +186,36 @@ function getProduct($conn, $id)
     else return 0;
 }
 
+function getAllCategories($conn)
+{
+    $sql = "SELECT * FROM sitedb.Category";
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0)
+    {
+        while($row = $result->fetch_assoc())
+        {
+            $categories[] = $row;
+        }
+        return $categories;
+    }
+}
+
+function writeAllCategories($conn)
+{
+    $categories = getAllCategories($conn);
+    echo "<h4 class='border-bottom pb-2 ps-2'><strong>Kategorie</strong></h4>";
+    foreach($categories as $category)
+    {
+        $name = $category['Name'];
+        if(!empty($_GET['input']))
+        {
+            $input = $_GET['input'];
+            echo "<a href='sklep?Category=$name&input=$input'>$name</a><br>";
+        }
+    }
+}
+
 function getAllAttributes($conn)
 {
     $sql = "SELECT * FROM sitedb.Attribute";
@@ -259,7 +319,8 @@ function writeAllAttributes($conn)
 
     if (!empty($filters)) 
     {
-        echo "<form class='px-2' method='GET'>";
+        echo "<h4 class='border-bottom pb-2 ps-2'><strong>Filtry</strong></h4>
+              <form class='px-2' method='GET'>";
 
         if (isset($_GET['Category'])) 
         {
@@ -412,7 +473,7 @@ function getFilteredProducts($site_conn, $filters)
 
     foreach ($filters as $key => $values) 
     {
-        if ($key === 'Category') {
+        if ($key === 'Category' || $key === 'input') {
             continue;
         }
 
@@ -481,5 +542,40 @@ function searchProducts($conn, $searchInput)
 
     $stmt->close();
     return $products;
+}
+
+function findCommon($arrX, $arrY)
+{
+    $result = [];
+
+    foreach ($arrX as $itemX) 
+    {
+        foreach ($arrY as $itemY)
+        {
+            if ($itemX === $itemY) 
+            {
+                $result[] = $itemX;
+            }
+        }
+    }
+    return $result;
+}
+
+function getUserAddressByType($conn, $login, $type) 
+{
+    $stmt = $conn->prepare("SELECT * FROM clientdb.address WHERE UserID = (SELECT ID FROM clientdb.user WHERE Login = ?) AND Type = ?");
+    $stmt->bind_param('ss', $login, $type);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+
+function writeIfEmpty($string)
+{
+    if($string === "Brak")
+    {
+        echo "";
+    }
+    else echo "$string";
 }
 ?>
