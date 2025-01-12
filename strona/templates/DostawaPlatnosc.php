@@ -1,46 +1,175 @@
-<h2 align="center" class="mt-4">Dostawa i Płatność</h2>
-<div class="container my-4">
-    <div class="row mb-3">
-        <!-- pojemnik na obiekty dodane do koszyka -->
-            <div class="col-8"> 
-            <!-- 1 obiekt dodany do koszyka -->            
-                <div class="row bg-light shadow-sm rounded-0 align-items-center justify-content-between mb-2">
-                    <div class="col-2" style="">
-                        <a href="produktDane?id=$id" class="" style="flex-shrink: 0; width: 120px; height: 120px;">
-                            <img src="./images/Lenovo Legion 5-16.jpg" alt="nazwa-zdjecia" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
-                        </a> 
-                    </div>
-                    <div class="col-6 d-flex align-items-center mt-3">
-                        <p><strong>Pełna nazwa produktu</strong></p>
-                    </div>
-                    <div class="col-2 d-flex align-items-center mt-3">
-                        <p class="fs-4">4.599 zł</p>
-                    </div>
-                    <div class="col-1 p-0">
-                        <input type="number" class="form-control rounded-0" id="NumberOfItemns" name="NumberOfItemns" placeholder="" min="1" max="99">
-                    </div>
-                    <div class="col-1">
-                        <button type="#" class="btn btn-light rounded-0" style="width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                        </svg>
-                        </button>
-                    </div>
-                </div>
-                <!-- kolejny obiekt dodany do koszyka --> 
-            </div>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-            
-        <!-- pojemnik na przyciski i cenę -->
-            <div class="col-4"> 
-                <div class="p-3 bg-light shadow-sm rounded-0">
-                    <div class="d-flex justify-content-between">
-                        <p class="mt-3 p-0">Do zapłoaty</p>
-                        <p class="mt-2 p-0 fs-4"><strong>4.599 zł</strong></p>
-                    </div>
-                    <button class="btn custom-btn rounded-0 w-100 mb-1" style="caret-color: transparent;">Dalej</button>
-                    <button class="btn btn-secondary rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#modal" style="caret-color: transparent;">Oblicz rate</button>
-                </div>
-            </div>
+<title>Game Tech</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="strona/static/styles.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+   <!-- <link rel="stylesheet" href="fontawesome-pro-5.15.3-web\fontawesome-pro-5.15.3-web\css\all.css"/> -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+        crossorigin="anonymous"></script>   
+
+  </head> 
+<body>
+
+<header class="container d-flex align-items-center justify-content-around mb-4 border">
+    
+
+    <div>
+        <a  id="home" href="home">
+            <img src="strona/static/otherImages/GAME_TECH_LOGO.png" alt="Logo" width="90" height="80" class="d-inline-block align-top">
+        </a>
+    </div>
+    
+
+    <div class="d-flex align-items-center justify-content-between position-relative" style="width: 50%;">
+
+        <div class="d-flex flex-column align-items-center mt-5">
+            <button class="btn btn-primary rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
+                <i class="bi bi-check-lg"></i>
+            </button>
+            <p class="mt-2">Koszyk</p> 
+        </div>
+        
+ 
+        <div class="d-flex flex-column align-items-center mt-5">
+            <button class="btn btn-link rounded-0 d-flex align-items-center justify-content-center p-1  border border-primary bg-light text-decoration-none" style="height:40px; width:40px;">
+                2
+            </button>
+            <p class="mt-2">Dostawa</p> 
+        </div>
+        
+
+        <div class="d-flex flex-column align-items-center mt-5">
+            <button class="btn btn-primary rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
+                3
+            </button>
+            <p class="mt-2">Płatność</p> 
+        </div>
+
+
+        <div class="d-flex position-absolute w-100 px-3 z-n1">
+            <div class="border border-primary w-75"></div>
+            <div class="border border-secondary w-75"></div>
+        </div>
+    </div>
+</header>
+
+
+<!--
+<div class="container">
+    <div class="steps-container">
+
+        <div class="step">
+            <button class="btn btn-primary">
+            <i class="bi bi-check-lg"></i>
+            </button>
+            <div class="step-name">Add to Cart</div>
+            <div class="step-line"></div>
+        </div>
+
+
+        <div class="step">
+            <button class="btn btn-primary">2</button>
+            <div class="step-name">Checkout</div>
+            <div class="step-line"></div>
+        </div>
+
+
+        <div class="step">
+            <button class="btn btn-primary">3</button>
+            <div class="step-name">Payment</div>
+        </div>
     </div>
 </div>
+
+
+<header class="d-flex align-items-center justify-content-between mb-5">
+<div class="mt-2" style="width: 200px;">
+    <a href="home">
+        <img src="strona/static/otherImages/GAME_TECH_LOGO.png" alt="Logo">
+    </a>
+</div>
+
+<div class="fs-3">
+    <div class="d-flex position-absolute w-100 z-n1">
+        <div class="border border-primary" style="width: 50%"></div>
+        <div class="border border-secondary" style="width: 50%;"></div>
+    </div>
+            <div class="d-flex align-items-center pl-2" style="background-color: #f2f2f2;">
+            <div class="btn btn-primary rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
+                    <span>
+                        <i class="bi bi-check-lg" style="inline-block font-size: 14px margin-bottom: 4px;"></i>
+                    </span>
+            </div>
+            <div style="background-color: #f2f2f2; color: #ff503c; padding: 0 16px;">koszyk</div>
+        </div>
+            <div class="d-flex align-items-center pl-2" style="background-color: #f2f2f2;">
+            <div class="btn btn-primary rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px; background-color: #ff503c; color: #fff;">
+                    <span>
+                        <span>2</span>
+                    </span>
+            </div>
+            <div style="background-color: #f2f2f2; color: #3c1400; padding: 0 16px; font-weight: 600;">dostawa i płatność</div>
+        </div>
+            <div class="d-flex align-items-center pl-2" style="background-color: #f2f2f2;">
+            <div class="btn btn-primary rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px; border: 1px solid #757575; color: #757575;">
+                    <span>
+                        <span>3</span>
+                    </span>
+            </div>
+            <div style="background-color: #f2f2f2; color: #757575;; padding: 0 16px; font-weight: 600;">podsumowanie</div>
+        </div>
+            </div>
+
+
+<div style="width:190px;"></div>
+
+
+
+                </header>
+-->
+<div class="container mt-5" style="background-color: blue;">
+    <div class="row">
+        <!-- Larger column (9 parts) -->
+        <div class="col-md-9">
+            <!-- First row inside the larger column -->
+            <div class="row">
+                <div class="col-12">
+                    <p>This is the first row inside the larger column. Its height will adjust according to its content.</p>
+                </div>
+            </div>
+            
+            <!-- Second row inside the larger column -->
+            <div class="row">
+                <div class="col-12">
+                    <p>This is the second row. Its height will adjust based on the content too.</p>
+                </div>
+            </div>
+            
+            <!-- Third row inside the larger column -->
+            <div class="row">
+                <div class="col-12">
+                    <p>This is the third row. It will also change its size based on its content.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smaller column (3 parts) -->
+        <div class="col-md-3">
+            <p>This is the smaller column. Its width is 3 out of 12 parts, and it will remain fixed.</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
