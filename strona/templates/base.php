@@ -56,13 +56,27 @@
     
           <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@IKONY PO PRAWEJ STRONIE KONTENER @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
           <div class="col-3 d-flex justify-content-center align-items-center">
-            <a class="btn btn-light rounded-0" aria-label="ulubione" href="ulubione" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
-              <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-                <path
-                  d="M25.738 7.601a6 6 0 0 0-8.324.156L16 9.172l-1.414-1.415A6 6 0 0 0 6.1 16.243l9.545 9.546a.5.5 0 0 0 .708 0l9.546-9.546a6 6 0 0 0 0-8.486l-.162-.156zm-.395 1.02a5 5 0 0 1-.15 6.915L16 24.727l-9.192-9.193a5 5 0 1 1 7.07-7.07l1.768 1.767a.5.5 0 0 0 .708 0l1.767-1.768a5 5 0 0 1 7.071 0l.15.157z">
-                </path>
-              </svg>
-            </a>
+            <?php 
+              if(!authorisedUser()){
+              echo '<a class="btn btn-light rounded-0" aria-label="ulubione" href="logowanie" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                  <path
+                    d="M25.738 7.601a6 6 0 0 0-8.324.156L16 9.172l-1.414-1.415A6 6 0 0 0 6.1 16.243l9.545 9.546a.5.5 0 0 0 .708 0l9.546-9.546a6 6 0 0 0 0-8.486l-.162-.156zm-.395 1.02a5 5 0 0 1-.15 6.915L16 24.727l-9.192-9.193a5 5 0 1 1 7.07-7.07l1.768 1.767a.5.5 0 0 0 .708 0l1.767-1.768a5 5 0 0 1 7.071 0l.15.157z">
+                  </path>
+                </svg>
+              </a>';
+            }
+            else
+            {
+              echo '<a class="btn btn-light rounded-0" aria-label="ulubione" href="ulubione" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                  <path
+                    d="M25.738 7.601a6 6 0 0 0-8.324.156L16 9.172l-1.414-1.415A6 6 0 0 0 6.1 16.243l9.545 9.546a.5.5 0 0 0 .708 0l9.546-9.546a6 6 0 0 0 0-8.486l-.162-.156zm-.395 1.02a5 5 0 0 1-.15 6.915L16 24.727l-9.192-9.193a5 5 0 1 1 7.07-7.07l1.768 1.767a.5.5 0 0 0 .708 0l1.767-1.768a5 5 0 0 1 7.071 0l.15.157z">
+                  </path>
+                </svg>
+              </a>';
+            }
+           ?>
             <div class="dropdown">
               <button class="btn btn-light rounded-0 mx-4" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
             <a aria-label="panel klienta" href="#">
@@ -76,7 +90,7 @@
 <!-----------------------------Logowanie i menu konta użytkownika----------------------------------------------------------------------->
           <ul class="dropdown-menu rounded-0 d-flex flex-column" aria-labelledby="dropdownMenuButton">
           <?php 
-        require_once("./include/functions.php");
+        require_once __DIR__ . '/..//../include/global.php';
         if(!authorisedUser())
         {
           echo '<li class="pb-2 border-bottom text-center">              
@@ -124,13 +138,28 @@
           </ul>
           </div>
           <!---------------------------------------------------------------------------------------------------------------------->
-            <a class="btn btn-light rounded-0" aria-label="koszyk" href="koszyk" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
-              <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
-                <path fill-rule="evenodd"
-                  d="M22 21a3 3 0 1 1-2.236 1h-5.528a3 3 0 1 1-2.844-.938L8.098 6H4.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .488.393L9.558 8H25.5a.5.5 0 0 1 .488.608l-2 9A.5.5 0 0 1 23.5 18H11.746l.656 3H22zm2.877-12l-1.778 8H11.527l-1.75-8h15.1zM12 22a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 2a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
-                </path>
-              </svg>
-            </a>
+            <?php
+              if(!authorisedUser())
+              {
+                echo '<a class="btn btn-light rounded-0" aria-label="koszyk" href="logowanie" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                  <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                    <path fill-rule="evenodd"
+                      d="M22 21a3 3 0 1 1-2.236 1h-5.528a3 3 0 1 1-2.844-.938L8.098 6H4.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .488.393L9.558 8H25.5a.5.5 0 0 1 .488.608l-2 9A.5.5 0 0 1 23.5 18H11.746l.656 3H22zm2.877-12l-1.778 8H11.527l-1.75-8h15.1zM12 22a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 2a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                    </path>
+                  </svg>
+                </a>';
+              }
+              else
+              {
+                echo '<a class="btn btn-light rounded-0" aria-label="koszyk" href="koszyk" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
+                  <svg class="hover-fill" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                    <path fill-rule="evenodd"
+                      d="M22 21a3 3 0 1 1-2.236 1h-5.528a3 3 0 1 1-2.844-.938L8.098 6H4.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .488.393L9.558 8H25.5a.5.5 0 0 1 .488.608l-2 9A.5.5 0 0 1 23.5 18H11.746l.656 3H22zm2.877-12l-1.778 8H11.527l-1.75-8h15.1zM12 22a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 2a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                    </path>
+                  </svg>
+                </a>';
+              }
+            ?>
           </div>
           <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
         </div>

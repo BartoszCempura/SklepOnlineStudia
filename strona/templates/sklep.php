@@ -15,10 +15,13 @@
       </div>
     </div>
     <div class="col-8"> 
+      <?php raiseMessageAndRedirect("#"); ?>
       <div class="p-3 bg-light shadow-sm rounded-0">
 <!-----------------------------produkt z bazy, pojemnik----------------------------------------------------------------------->
             <?php
             require_once dirname(dirname(__DIR__)) . '/include/global.php';
+
+            
 
             if ($_SERVER['REQUEST_METHOD'] === 'GET') 
             {
