@@ -103,6 +103,15 @@
   color: #fff;
 }
 
+.custom-linkbtn {
+  border: 3px solid #7b6dfa;
+  color:#7b6dfa;
+}
+.custom-linkbtn:hover {
+  border: 3px solid #5d51c8;
+  color:#5d51c8;
+}
+
 .custom-btn:hover {
   background-color: #5d51c8;
   color: #fff;

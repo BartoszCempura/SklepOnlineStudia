@@ -158,7 +158,7 @@
                             <div class="col-3 d-flex justify-content-center">
                                 <div class="form-group">
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckSettings">
+                                        <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckSettings"></input>
                                         <label class="form-check-label" for="gridCheckSettings">
                                             <small>Firma</small>
                                         </label>
