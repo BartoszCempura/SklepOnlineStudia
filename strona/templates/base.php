@@ -226,8 +226,8 @@
             </button>
 
             <ul class="dropdown-menu dropdown-menu-start rounded-0" aria-labelledby="dropdownMenuButtonPromocje">
-            <li><a class="dropdown-item" href="#">Promocje</a></li>
-            <li><a class="dropdown-item" href="#">Nowości</a></li>
+            <li><a class="dropdown-item" href="#" onclick="location.href='#promocje'">Promocje</a></li>
+            <li><button class="dropdown-item" href="#" onclick="location.href='#nowosci'">Nowości</button></li>
             <li><a class="dropdown-item" href="#">Karty podarunkowe</a></li>
           </ul>
         </div>

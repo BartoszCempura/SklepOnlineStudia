@@ -23,6 +23,7 @@ if(passwordsDontMatch($password,$repeatPassword))
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT); //PASSWORD HASHING
 
+
 $sql = "INSERT INTO `User` (Login, Password, First_Name, Last_Name, Email, Phone_Number) VALUES (?, ?, ?, ?, ?, ?)";    //INSERT 
 $query = $client_conn->prepare($sql);
 
@@ -30,7 +31,9 @@ $query->bind_param("ssssss", $login, $hashedPassword, $name, $surname, $email, $
 
 if($query->execute())
 {
-    $_SESSION['ID'] = $client_conn->insert_id; 
+    $_SESSION['ID'] = $client_conn->insert_id;
+    $id = $_SESSION['ID'];
+    $addAddress = "INSERT INTO clientdb.Address VALUES ($id, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'shipping')"; // ADD client-connected address
     header("location: ../rejestracja?error=registrationnone");
 }
 

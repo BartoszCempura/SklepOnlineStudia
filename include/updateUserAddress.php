@@ -25,7 +25,7 @@ else
                 SET UserID = ?, Street = ?, Number = ?, Country = ?, City = ?, Zip_Code = ?, Type = ?
                 WHERE clientdb.user.ID = ? AND clientdb.address.Type = ?";
         $stmt = $client_conn->prepare($sql);
-        $stmt->bind_param('issssssis', $userID, $street, $streetNumber, $country, $city, $zip, $type, $userID. $type);
+        $stmt->bind_param('issssssis', $userID, $street, $streetNumber, $country, $city, $zip, $type, $userID, $type);
 }
 
 $stmt->execute();

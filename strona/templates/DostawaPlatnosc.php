@@ -1,3 +1,14 @@
+<?php
+    
+    $address = getUserAddressByType($client_conn, $_SESSION['login'], "shipping");
+    $addressFaktura = getUserAddressByType($client_conn, $_SESSION['login'], "billing");
+    $userID = authorisedUser();
+    $cart = getUserCart($client_conn, $userID);
+    $total = $cart['Total'];
+
+    $user = getUser($client_conn, $_SESSION['login']);
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -65,156 +76,156 @@
 
 <div class="container">
     <div class="row g-5">
-        <div class="col-md-9">
-            <div class="row mb-3">
-                <div class="col-12 border shadow p-3">
-                    <h4 class="mb-3">Dane odbiorcy przesyłki</h4>
-                    <p>Podaj adres gdzie mamy dostarczyc przesyłkę!</p>
-                        <div class="form-check d-flex align-items-center mb-3">
-                            <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckBuy"></input>
-                                <label class="form-check-label" for="gridCheckBuy">
-                                    <small>Firma</small>
-                                </label>
-                        </div>
-                        
-                        <form style="width:65%;" method="post">
-                        <div class="row">
-                            <div class="col-6" id="nameColumn">
-                                <input type="text" class="form-control rounded-0" id="NameDeliveryBuy" name="NameDeliveryBuy" data-max-length="50" value="" placeholder="Imie">
+            <div class="col-md-9">
+                <div class="row mb-3">
+                    <div class="col-12 border shadow p-3">
+                        <h4 class="mb-3">Dane odbiorcy przesyłki</h4>
+                        <p>Podaj adres gdzie mamy dostarczyc przesyłkę!</p>
+                            <div class="form-check d-flex align-items-center mb-3">
+                                <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckBuy"></input>
+                                    <label class="form-check-label" for="gridCheckBuy">
+                                        <small>Firma</small>
+                                    </label>
                             </div>
-                            <div class="col-6" id="surnameColumn">
-                                <input type="text" class="form-control rounded-0" id="SurnameDeliveryBuy" name="SurnameDeliveryBuy" data-max-length="50" value="" placeholder="Nazwisko">
-                            </div>
-                        </div>
+                            
+                            <form action="include/processPurchase.php" style="width:65%;" method="post" id="formID">
                             <div class="row">
-                                <label  class="my-2" for="inputPhone4">Numer telefonu</label>
-                                <div class="col-md-6">                               
-                                    <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0" id="inputPhone4" name="phoneNumber" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
+                                <div class="col-6" id="nameColumn">
+                                    <input type="text" class="form-control rounded-0" id="NameDeliveryBuy" name="NameDeliveryBuy" data-max-length="50" value="" placeholder="Imie">
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control rounded-0" id="inputEmail4" name="email" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p class="my-2">Adres</p>
-                                <div class="col-9">
-                                    <input type="text" class="form-control rounded-0" id="inputStreetDelivery" name="street" value="<?php writeIfEmpty($StreetDostawa)?>" placeholder="Ulica" pattern="[a-zA-Z]+">
-                                </div>
-                                <div class="col-3">
-                                    <input type="number" class="form-control rounded-0" id="inputStreetNumber" name="streetNumber" value="<?php writeIfEmpty($NumberDostawa)?>" placeholder="" min="1" max="499">
+                                <div class="col-6" id="surnameColumn">
+                                    <input type="text" class="form-control rounded-0" id="SurnameDeliveryBuy" name="SurnameDeliveryBuy" data-max-length="50" value="" placeholder="Nazwisko">
                                 </div>
                             </div>
-                            <div class="row w-75">
-                                <p class="my-2">Kod pocztowy</p>
-                                <div class="col-4">
-                                    <input type="text" class="form-control rounded-0" id="inputZipDelivery" name="zip" value="<?php writeIfEmpty($Zip_CodeDostawa)?>" placeholder="xx-xxx" pattern="([0-9]{2})-([0-9]{3})" maxlenght="6">
+                                <div class="row">
+                                    <label  class="my-2" for="inputPhone4">Numer telefonu</label>
+                                    <div class="col-md-6">                               
+                                        <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0" id="inputPhone4" name="phoneNumber" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control rounded-0" id="inputEmail4" name="email" placeholder="Email">
+                                    </div>
                                 </div>
-                                <div class="col-8">
-                                    <input type="text" class="form-control rounded-0" id="inputCityDelivery" name="city" value="<?php writeIfEmpty($CityDostawa)?>" placeholder="Miasto" pattern="[a-zA-Z]+">
+                                <div class="row">
+                                    <p class="my-2">Adres</p>
+                                    <div class="col-9">
+                                        <input type="text" class="form-control rounded-0" id="inputStreetDelivery" name="street" value="<?php $StreetDostawa = $address['Street']; writeIfEmpty($StreetDostawa)?>" placeholder="Ulica" pattern="[a-zA-Z]+">
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="number" class="form-control rounded-0" id="inputStreetNumber" name="streetNumber" value="<?php $NumberDostawa = $address['Number']; writeIfEmpty($NumberDostawa)?>" placeholder="" min="1" max="499">
+                                    </div>
                                 </div>
-                            </div>
-                            <input type="text" class="form-control rounded-0 my-3 w-50" id="inputCountrySettings" name="country" value="<?php writeIfEmpty($CountryDostawa)?>" placeholder="Kraj" pattern="[a-zA-Z]+">
-                        </form>
+                                <div class="row w-75">
+                                    <p class="my-2">Kod pocztowy</p>
+                                    <div class="col-4">
+                                        <input type="text" class="form-control rounded-0" id="inputZipDelivery" name="zip" value="<?php $Zip_CodeDostawa = $address['Zip_Code']; writeIfEmpty($Zip_CodeDostawa)?>" placeholder="xx-xxx" pattern="([0-9]{2})-([0-9]{3})" maxlenght="6">
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control rounded-0" id="inputCityDelivery" name="city" value="<?php $CityDostawa = $address['City']; writeIfEmpty($CityDostawa)?>" placeholder="Miasto" pattern="[a-zA-Z]+">
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control rounded-0 my-3 w-50" id="inputCountrySettings" name="country" value="<?php $CountryDostawa = $address['Country']; writeIfEmpty($CountryDostawa)?>" placeholder="Kraj" pattern="[a-zA-Z]+">
+                            </form>
 
 
 
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Second row inside the larger column -->
-            <div class="row mb-3">
-                <div class="col-12 border shadow p-3 ">
-                <h4 class="mb-3">Wybór dostawcy</h4>
-                    <p>Wybierz preferowaną formę dostawy!</p>
-                        <div class="form-check d-flex align-items-center mb-3">
-                            <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryExpress"></input>
-                                <label class="form-check-label" for="gridCheckDeliveryExpress">
-                                    <small>Kurier express</small>
-                                </label>
-                                <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Dostawa zamwienia zostanie zrealizowana na terenie Polski za pośrednictwem jednej z firm kurierskich. Zamwienie dotrze do Ciebie w ciąguokoło 1 dnia roboczego od momentu wysyłki. Przewoźnicy, z ktrymi wspłpracujemy to m.in.: GLS (większość zawień), DPD, Geis (w przypadku większych gabarytw) orazZadbano i SUUS (w przypadku wniesienia i montażu produktw AGD i RTV)"></i>
-                        </div>
-                        <div class="border-bottom"></div>
-                        <div class="form-check d-flex align-items-center my-3">
-                            <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
-                                <label class="form-check-label" for="gridCheckDeliveryStandard">
-                                    <small>Kurier standard</small>
-                                </label>
-                                <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Dostawa zamwienia zostanie zrealizowana na terenie Polski. Zamwienie dotrze do Ciebie w ciągu około 2 dni roboczych od momentu wysyłki. Przewoźnicy z ktrymi wspłpracujemy to m.in.: GLS, DPD i Poczta Polska."></i>
-                        </div>
-                </div>
-            </div>
-            
-            <!-- Third row inside the larger column -->
-            <div class="row">
-            <div class="col-12 border shadow p-3 ">
-                <h4 class="mb-3">Wybierz formę płatności</h4>
-                    <div class="d-flex justify-content-between">
+                
+                <!-- Second row inside the larger column -->
+                <div class="row mb-3">
+                    <div class="col-12 border shadow p-3 ">
+                    <h4 class="mb-3">Wybór dostawcy</h4>
+                        <p>Wybierz preferowaną formę dostawy!</p>
                             <div class="form-check d-flex align-items-center mb-3">
                                 <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryExpress"></input>
-                                <img src="strona/static/otherImages/blik.svg" alt="" style="height: 20px;">
-                                    <label class="form-check-label ms-3" for="gridCheckDeliveryExpress">
-                                        <small>Blik</small>
+                                    <label class="form-check-label" for="gridCheckDeliveryExpress">
+                                        <small>Kurier express</small>
                                     </label>
+                                    <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Dostawa zamwienia zostanie zrealizowana na terenie Polski za pośrednictwem jednej z firm kurierskich. Zamwienie dotrze do Ciebie w ciąguokoło 1 dnia roboczego od momentu wysyłki. Przewoźnicy, z ktrymi wspłpracujemy to m.in.: GLS (większość zawień), DPD, Geis (w przypadku większych gabarytw) orazZadbano i SUUS (w przypadku wniesienia i montażu produktw AGD i RTV)"></i>
                             </div>
-                            <p><strong>Cena zł</strong></p>
-                        </div>
-                        <div class="border-bottom"></div>
-                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="border-bottom"></div>
                             <div class="form-check d-flex align-items-center my-3">
                                 <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
-                                <img src="strona/static/otherImages/googlepay.svg" alt="" style="height: 20px;">
-                                    <label class="form-check-label ms-3" for="gridCheckDeliveryStandard">
-                                        <small>Google Pay</small>
+                                    <label class="form-check-label" for="gridCheckDeliveryStandard">
+                                        <small>Kurier standard</small>
                                     </label>
+                                    <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Dostawa zamwienia zostanie zrealizowana na terenie Polski. Zamwienie dotrze do Ciebie w ciągu około 2 dni roboczych od momentu wysyłki. Przewoźnicy z ktrymi wspłpracujemy to m.in.: GLS, DPD i Poczta Polska."></i>
                             </div>
-                            <p class="pt-3"><strong>Cena zł</strong></p>
+                    </div>
+                </div>
+                
+                <!-- Third row inside the larger column -->
+                <div class="row">
+                <div class="col-12 border shadow p-3 ">
+                    <h4 class="mb-3">Wybierz formę płatności</h4>
+                        <div class="d-flex justify-content-between">
+                                <div class="form-check d-flex align-items-center mb-3">
+                                    <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryExpress"></input>
+                                    <img src="strona/static/otherImages/blik.svg" alt="" style="height: 20px;">
+                                        <label class="form-check-label ms-3" for="gridCheckDeliveryExpress">
+                                            <small>Blik</small>
+                                        </label>
+                                </div>
+                                <p><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="form-check d-flex align-items-center my-3">
+                                    <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
+                                    <img src="strona/static/otherImages/googlepay.svg" alt="" style="height: 20px;">
+                                        <label class="form-check-label ms-3" for="gridCheckDeliveryStandard">
+                                            <small>Google Pay</small>
+                                        </label>
+                                </div>
+                                <p class="pt-3"><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="form-check d-flex align-items-center my-3">
+                                    <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
+                                    <img src="strona/static/otherImages/transfer.svg" alt="" style="height: 20px;">
+                                        <label class="form-check-label ms-3" for="gridCheckDeliveryStandard">
+                                            <small>Przelew tradycyjny</small>
+                                        </label>
+                                </div>
+                                <p class="pt-3"><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                            </div>
+                            <div class="border-bottom"></div>
+                            <div class="d-flex justify-content-between">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
+                                    <img src="strona/static/otherImages/mastercard.svg" alt="" style="height: 20px;">
+                                        <label class="form-check-label ms-3" for="gridCheckDeliveryStandard">
+                                            <small>Karta płatnicza online</small>
+                                        </label>
+                                        <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Bezpieczna płatność przez internet kartą kredytową lub debetową. Do realizacji transakcji wykorzystujemy system Przelewy24."></i>
+                                </div>
+                                <p class="pt-3"><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smaller column (3 parts) -->
+            <div class="col-md-3 border shadow p-3" style="height: 260px;">
+                        <div class="d-flex justify-content-between">
+                            <p class="mt-3 p-0">Koszt produktów:</p>
+                            <p class="mt-2 p-0 fs-4"><strong><?php echo $total?>zł</strong></p>
                         </div>
-                        <div class="border-bottom"></div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="form-check d-flex align-items-center my-3">
-                                <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
-                                <img src="strona/static/otherImages/transfer.svg" alt="" style="height: 20px;">
-                                    <label class="form-check-label ms-3" for="gridCheckDeliveryStandard">
-                                        <small>Przelew tradycyjny</small>
-                                    </label>
-                            </div>
-                            <p class="pt-3"><strong>Cena zł</strong></p>
+                        <div class="d-flex justify-content-between">
+                            <p class="mt-3 p-0">Koszt dostawy:</p>
+                            <p class="mt-2 p-0 fs-4"><strong>9.99 zł</strong></p>
                         </div>
                         <div class="border-bottom"></div>
                         <div class="d-flex justify-content-between">
-                            <div class="form-check d-flex align-items-center">
-                                <input class="form-check-input rounded-0 me-3" type="checkbox" id="gridCheckDeliveryStandard"></input>
-                                <img src="strona/static/otherImages/mastercard.svg" alt="" style="height: 20px;">
-                                    <label class="form-check-label ms-3" for="gridCheckDeliveryStandard">
-                                        <small>Karta płatnicza online</small>
-                                    </label>
-                                    <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Bezpieczna płatność przez internet kartą kredytową lub debetową. Do realizacji transakcji wykorzystujemy system Przelewy24."></i>
-                            </div>
-                            <p class="pt-3"><strong>Cena zł</strong></p>
+                            <p class="mt-3 p-0">Do zapłaty:</p>
+                            <p class="mt-2 p-0 fs-4"><strong><?php echo $total + 9.99;?> zł</strong></p>
                         </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Smaller column (3 parts) -->
-        <div class="col-md-3 border shadow p-3" style="height: 260px;">
-                    <div class="d-flex justify-content-between">
-                        <p class="mt-3 p-0">Koszt produktów:</p>
-                        <p class="mt-2 p-0 fs-4"><strong>zł</strong></p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p class="mt-3 p-0">Koszt dostawy:</p>
-                        <p class="mt-2 p-0 fs-4"><strong>zł</strong></p>
-                    </div>
-                    <div class="border-bottom"></div>
-                    <div class="d-flex justify-content-between">
-                        <p class="mt-3 p-0">Do zapłaty:</p>
-                        <p class="mt-2 p-0 fs-4"><strong>zł</strong></p>
-                    </div>
-                    <a href="Podsumowanie" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
-                                Dalej
-                    </a>
-        </div>
+                        <button type="submit" form="formID" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
+                                    Dalej
+                        </button>
+            </div>   
 </div>
 
 <a href="koszyk" class="btn custom-btn rounded-0 my-5">Powrót do koszyka</a>

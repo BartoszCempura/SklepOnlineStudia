@@ -277,14 +277,16 @@ function writeTechData($conn, $id)
     $data = getTechData($conn, $id);
 
     foreach ($data as $attribute => $values) 
+    {
+        echo "<div><strong>{$attribute}:</strong> ";
+        foreach ($values as $value) 
         {
-            foreach ($values as $value) 
-            {
-                echo "<h3>{$attribute}</h3>
-                      <p>$value</p>"; 
-            }
+            echo "<span>$value</span> ";
         }
+        echo "</div>";
+    }
 }
+
 
 
 function getFilters($conn, $category)
@@ -361,6 +363,31 @@ function writeAllAttributes($conn)
     {
         return;
     }   
+}
+
+function getUserCart($client_conn, $userID)
+{
+    if (empty($userID)) {
+        return false;
+    }
+
+    $sql = "SELECT Total FROM clientdb.Cart
+            WHERE clientdb.Cart.UserID = ?";
+
+    
+    $stmt = $client_conn->prepare($sql);
+    $stmt->bind_param('i', $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        return; 
+    }
+    else 
+    { 
+        $cart = $result->fetch_assoc();
+        return $cart;
+    }
 }
 
 function getUserCart_Product($clientConn, $siteConn, $userID)
@@ -675,4 +702,79 @@ function writeAllCartProducts($client_conn, $site_conn, $userID)
 
     }
 }
+
+function getUserWishlistProducts($client_conn, $site_conn, $userID)
+{
+    if(empty($userID))
+    { return false; }
+
+    $sql = "SELECT Wishlist.ProductID 
+            FROM clientdb.Wishlist 
+            WHERE clientdb.Wishlist.UserID = ?";
+
+    $stmt = $client_conn->prepare($sql);
+    $stmt->bind_param('i', $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        return []; 
+    }
+
+    $wishListProducts = [];
+    while ($row = $result->fetch_assoc()) {
+        $wishListProducts[] = $row;
+    }
+
+    $products = [];
+
+    foreach ($wishListProducts as $wishListProduct) {
+        $sqlProduct = "SELECT * FROM sitedb.Product WHERE ID = ?";
+        $stmtProduct = $site_conn->prepare($sqlProduct);
+        $stmtProduct->bind_param('i', $wishListProduct['ProductID']);
+        $stmtProduct->execute();
+        $resultProduct = $stmtProduct->get_result();
+
+        if ($product = $resultProduct->fetch_assoc()) 
+        {
+            $products[] = $product;
+        }
+    }
+
+    return $products;
+}
+
+function writeUserWishListProducts($client_conn, $site_conn, $userID)
+{
+    $products = getUserWishlistProducts($client_conn, $site_conn, $userID);
+
+    foreach($products as $product)
+    {
+      $Name = $product['Name'];
+      $Image = $product['Image'];
+      $ID = $product['ID'];
+      $productData = getProduct($site_conn, $ID);
+      $price = $productData['Price'];
+
+      echo "<div class='row bg-light shadow-sm rounded-0 align-items-center justify-content-between mb-2'>
+                <div class='col-2' style=''>
+                    <a href='produktDane?id=$ID' class='' style='flex-shrink: 0; width: 120px; height: 120px;'>
+                        <img src='./images/$Image' alt='nazwa-zdjecia' class='img-fluid' style='object-fit: cover; width: 100%; height: 100%;'>
+                    </a> 
+                </div>
+                <div class='col-6 d-flex align-items-center mt-3'>
+                    <p><strong>$Name</strong></p>
+                </div>
+                <div class='col-2 d-flex align-items-center mt-3'>
+                    <p class='fs-4'>$price zł</p>
+                </div>
+                <div class='col-2 d-flex align-items-center mt-3'>
+                    <button type='submit' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
+                        <i class='bi bi-heart-fill fs-3'></i>
+                    </button>
+                </div>
+            </div>";
+    }
+}
+
 ?>
