@@ -9,7 +9,7 @@ $baseTemplate = BASE_PATH . '/../strona/templates/base.php';
 $page = $_GET['page'] ?? 'home'; 
 
 
-if ($page == 'DostawaPlatnosc') {
+if ($page == 'DostawaPlatnosc' || $page == 'podsumowanie') {
 
     $contentPath = BASE_PATH . "/../strona/templates/{$page}.php";
 

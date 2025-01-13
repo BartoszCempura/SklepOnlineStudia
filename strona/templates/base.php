@@ -308,7 +308,7 @@
       }
     </style>
 
-    <script src="strona/static/index3.js"></script>
+    <script src="strona/static/index5.js"></script>
   
     </body>
 

@@ -27,13 +27,13 @@
                 }
                 else
                 {
-                    $StreetFaktura = "Brak";
-                    $NumberFaktura = "Brak";
-                    $CountryFaktura = "Brak";
-                    $CityFaktura = "Brak";
-                    $Zip_CodeFaktura = "Brak";
-                    $companyNameFaktura = "Brak";
-                    $NipFaktura = "Brak";
+                    $StreetFaktura = "";
+                    $NumberFaktura = "";
+                    $CountryFaktura = "";
+                    $CityFaktura = "";
+                    $Zip_CodeFaktura = "";
+                    $companyNameFaktura = "";
+                    $NipFaktura = "";
                 }
 
                 if(!empty($dostawa))
@@ -46,24 +46,24 @@
                 }
                 else
                 {
-                    $StreetDostawa = "Brak";
-                    $NumberDostawa = "Brak";
-                    $CountryDostawa = "Brak";
-                    $CityDostawa = "Brak";
-                    $Zip_CodeDostawa = "Brak";
+                    $StreetDostawa = "";
+                    $NumberDostawa = "";
+                    $CountryDostawa = "";
+                    $CityDostawa = "";
+                    $Zip_CodeDostawa = "";
                 }
             }
             else
             {
                 // OSTAVIT' |
                 //          v
-                $companyName = "Brak";
-                $Nip = "Brak";
-                $Street = "Brak";
-                $Number = "Brak";
-                $Country = "Brak";
-                $City = "Brak";
-                $Zip_Code = "Brak";
+                $companyName = "";
+                $Nip = "";
+                $Street = "";
+                $Number = "";
+                $Country = "";
+                $City = "";
+                $Zip_Code = "";
 
                 $PhoneNumber = "Brak";
                 $Email = "Brak";
