@@ -19,19 +19,19 @@
         echo "(" . $amountOfProducts . ")";
     ?></h2>
 <div class="container my-4">
-    <div class="row mb-3">
+    <div class="row">
         <!-- pojemnik na obiekty dodane do koszyka -->
-            <div class="col-8"> 
-                <?php
-                if(!empty($userID))
-                {
-                    writeAllCartProducts($client_conn, $site_conn, $userID);
-                }
-                ?>        
+            <div class="col-9 p-3 border shadow-sm rounded-0"> 
+                    <?php
+                    if(!empty($userID))
+                    {
+                        writeAllCartProducts($client_conn, $site_conn, $userID);
+                    }
+                    ?>      
             </div>
         <!-- pojemnik na przyciski i cenę -->
-            <div class="col-4"> 
-                <div class="p-3 bg-light shadow-sm rounded-0">
+            <div class="col-3"> 
+                <div class="p-3 border shadow-sm rounded-0">
                     <div class="d-flex justify-content-between">
                         <p class="mt-3 p-0">Do zapłaty:</p>
                         <p class="mt-2 p-0 fs-4"><strong><?php echo $total ." zł"?></strong></p>
@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<!-- komunikat przy usówaniu konta -->
+<!-- okno dla obliczenia raty kredytu -->
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-0">

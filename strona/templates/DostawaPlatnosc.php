@@ -7,7 +7,21 @@
     $total = $cart['Total'];
 
     $user = getUser($client_conn, $_SESSION['login']);
+    $Name = $user['First_Name'];
+    $Surname = $user['Last_Name'];
+    $PhoneNumber = $user['Phone_Number'];
+    $Email = $user['Email'];
+    
+    $adress = getUserAddress($client_conn, $_SESSION['login']);
+    $CompanyName = $adress['CompanyName'];
+    $Nip = $adress['Nip'];
+    $Street = $adress['Street'];
+    $StreetNumber = $adress['Number'];
+    $Country = $adress['Country'];
+    $City = $adress['City'];
+    $ZipCode = $adress['Zip_Code'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -60,9 +74,9 @@
         
 
         <div class="d-flex flex-column align-items-center mt-5">
-            <button class="btn custom-btn rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
+            <a href="podsumowanie" class="btn custom-btn rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
                 3
-            </button>
+            </a>
             <p class="mt-2">Podsumowanie</p> 
         </div>
 
@@ -78,7 +92,7 @@
     <div class="row g-5">
             <div class="col-md-9">
                 <div class="row mb-3">
-                    <div class="col-12 border shadow p-3">
+                    <div class="col border shadow-sm p-3">
                         <h4 class="mb-3">Dane odbiorcy przesyłki</h4>
                         <p>Podaj adres gdzie mamy dostarczyc przesyłkę!</p>
                             <div class="form-check d-flex align-items-center mb-3">
@@ -89,44 +103,44 @@
                             </div>
                             
                             <form action="include/processPurchase.php" style="width:65%;" method="post" id="formID">
-                                
+
                             <input type="hidden" name="isCompany" id="isCompany" value="0">
                             <div class="row">
                                 <div class="col-6" id="nameColumn">
-                                    <input type="text" class="form-control rounded-0" id="NameDeliveryBuy" name="NameDeliveryBuy" data-max-length="50" value="" placeholder="Imie">
+                                    <input type="text" class="form-control rounded-0" id="NameDeliveryBuy" name="NameDeliveryBuy" data-max-length="50" value="<?php echo $Name; ?>" placeholder="Imie">
                                 </div>
                                 <div class="col-6" id="surnameColumn">
-                                    <input type="text" class="form-control rounded-0" id="SurnameDeliveryBuy" name="SurnameDeliveryBuy" data-max-length="50" value="" placeholder="Nazwisko">
+                                    <input type="text" class="form-control rounded-0" id="SurnameDeliveryBuy" name="SurnameDeliveryBuy" data-max-length="50" value="<?php echo $Surname; ?>" placeholder="Nazwisko">
                                 </div>
                             </div>
                                 <div class="row">
                                     <label  class="my-2" for="inputPhone">Numer telefonu</label>
                                     <div class="col-md-6">                               
-                                        <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0" id="inputPhoneDelivery" name="inputPhoneDelivery" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
+                                        <input type="tel" pattern="([0-9]{3})([0-9]{3})([0-9]{3})" class="form-control rounded-0" id="inputPhoneDelivery" name="inputPhoneDelivery" value="<?php echo $PhoneNumber; ?>" placeholder="123456789" oninput="enforceDigits(event)" maxlenght="9">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="email" class="form-control rounded-0" id="inputEmailDelivery" name="inputEmailDelivery" placeholder="Email">
+                                        <input type="email" class="form-control rounded-0" id="inputEmailDelivery" name="inputEmailDelivery" value="<?php echo $Email; ?>" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <p class="my-2">Adres</p>
                                     <div class="col-9">
-                                        <input type="text" class="form-control rounded-0" id="inputStreetDelivery" name="inputStreetDelivery" value="" placeholder="Ulica" pattern="[a-zA-Z]+">
+                                        <input type="text" class="form-control rounded-0" id="inputStreetDelivery" name="inputStreetDelivery" value="<?php echo $Street; ?>" placeholder="Ulica" pattern="[a-zA-Z]+">
                                     </div>
                                     <div class="col-3">
-                                        <input type="number" class="form-control rounded-0" id="inputStreetNumberDelivery" name="inputStreetNumberDelivery" value="" placeholder="" min="1" max="499">
+                                        <input type="number" class="form-control rounded-0" id="inputStreetNumberDelivery" name="inputStreetNumberDelivery" value="<?php echo $StreetNumber; ?>" placeholder="" min="1" max="499">
                                     </div>
                                 </div>
                                 <div class="row w-75">
                                     <p class="my-2">Kod pocztowy</p>
                                     <div class="col-4">
-                                        <input type="text" class="form-control rounded-0" id="inputZipDelivery" name="inputZipDelivery" value="" placeholder="xx-xxx" pattern="([0-9]{2})-([0-9]{3})" maxlenght="6">
+                                        <input type="text" class="form-control rounded-0" id="inputZipDelivery" name="inputZipDelivery" value="<?php echo $ZipCode; ?>" placeholder="xx-xxx" pattern="([0-9]{2})-([0-9]{3})" maxlenght="6">
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="form-control rounded-0" id="inputCityDelivery" name="inputCityDelivery" value="" placeholder="Miasto" pattern="[a-zA-Z]+">
+                                        <input type="text" class="form-control rounded-0" id="inputCityDelivery" name="inputCityDelivery" value="<?php echo $City; ?>" placeholder="Miasto" pattern="[a-zA-Z]+">
                                     </div>
                                 </div>
-                                <input type="text" class="form-control rounded-0 my-3 w-50" id="inputCountryDelivery" name="inputCountryDelivery" value="" placeholder="Kraj" pattern="[a-zA-Z]+">
+                                <input type="text" class="form-control rounded-0 my-3 w-50" id="inputCountryDelivery" name="inputCountryDelivery" value="<?php echo $Country; ?>" placeholder="Kraj" pattern="[a-zA-Z]+">
                             </form>
 
 
@@ -136,7 +150,7 @@
                 
                 <!-- Second row inside the larger column -->
                 <div class="row mb-3">
-                    <div class="col-12 border shadow p-3 ">
+                    <div class="col border shadow-sm p-3 ">
                     <h4 class="mb-3">Wybór dostawcy</h4>
                         <p>Wybierz preferowaną formę dostawy!</p>
                             <div class="form-check d-flex align-items-center mb-3">
@@ -159,7 +173,7 @@
                 
                 <!-- Third row inside the larger column -->
                 <div class="row">
-                <div class="col-12 border shadow p-3 ">
+                <div class="col border shadow-sm p-3 ">
                     <h4 class="mb-3">Wybierz formę płatności</h4>
                         <div class="d-flex justify-content-between">
                                 <div class="form-check d-flex align-items-center mb-3">
@@ -169,7 +183,7 @@
                                             <small>Blik</small>
                                         </label>
                                 </div>
-                                <p><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                                <p><strong>Cena zł</strong></p>
                             </div>
                             <div class="border-bottom"></div>
                             <div class="d-flex align-items-center justify-content-between">
@@ -180,7 +194,7 @@
                                             <small>Google Pay</small>
                                         </label>
                                 </div>
-                                <p class="pt-3"><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                                <p class="pt-3"><strong>Cena zł</strong></p>
                             </div>
                             <div class="border-bottom"></div>
                             <div class="d-flex align-items-center justify-content-between">
@@ -191,7 +205,7 @@
                                             <small>Przelew tradycyjny</small>
                                         </label>
                                 </div>
-                                <p class="pt-3"><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                                <p class="pt-3"><strong>Cena zł</strong></p>
                             </div>
                             <div class="border-bottom"></div>
                             <div class="d-flex justify-content-between">
@@ -203,34 +217,40 @@
                                         </label>
                                         <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Bezpieczna płatność przez internet kartą kredytową lub debetową. Do realizacji transakcji wykorzystujemy system Przelewy24."></i>
                                 </div>
-                                <p class="pt-3"><strong>Cena <?php echo $total + 9.99;?> zł</strong></p>
+                                <p class="pt-3"><strong>Cena zł</strong></p>
                             </div>
                     </div>
                 </div>
             </div>
 
             <!-- Smaller column (3 parts) -->
-            <div class="col-md-3 border shadow p-3" style="height: 260px;">
+            <div class="col-md-3 border shadow-sm p-3" style="height: 300px;">
                         <div class="d-flex justify-content-between">
-                            <p class="mt-3 p-0">Koszt produktów:</p>
-                            <p class="mt-2 p-0 fs-4"><strong><?php echo $total?>zł</strong></p>
+                            <p class="mt-2 p-0">Koszt produktów:</p>
+                            <p class="p-0 fs-4"><strong><?php echo $total?>zł</strong></p>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p class="mt-3 p-0">Koszt dostawy:</p>
-                            <p class="mt-2 p-0 fs-4"><strong>9.99 zł</strong></p>
+                            <p class="mt-2 p-0">Koszt dostawy:</p>
+                            <p class="p-0 fs-4"><strong>xxx</strong></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mt-2 p-0">Koszt płatności:</p>
+                            <p class=" p-0 fs-4"><strong>xxx</strong></p>
                         </div>
                         <div class="border-bottom"></div>
-                        <div class="d-flex justify-content-between">
-                            <p class="mt-3 p-0">Do zapłaty:</p>
-                            <p class="mt-2 p-0 fs-4"><strong><?php echo $total + 9.99;?> zł</strong></p>
+                        <div class="d-flex justify-content-between mt-3">
+                            <p class="mt-2 p-0">Do zapłaty:</p>
+                            <p class="p-0 fs-4"><strong><?php echo $total?> zł</strong></p>
                         </div>
                         <a href="podsumowanie" form="formID" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
                                     Dalej
                         </a>
-            </div>   
+            </div>  
+            <a href="koszyk" class="btn custom-btn rounded-0 my-5">Powrót do koszyka</a>
+</div> 
 </div>
 
-<a href="koszyk" class="btn custom-btn rounded-0 my-5">Powrót do koszyka</a>
+
 
 <script>document.getElementById('gridCheckBuy').addEventListener('change', function() {
     toggleFirmaFields(this.checked);

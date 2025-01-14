@@ -91,59 +91,59 @@ function raiseMessageAndRedirect($redirectURL)
     {
         if($_GET['error'] === 'logintaken')
         {
-            echo '<div class="alert alert-danger" role="alert">
+            echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
                     Użyktownik z takim imieniem już istnieje!
                   </div>';
         }
         if($_GET['error'] === 'passwordsdontmatch')
         {
-            echo '<div class="alert alert-danger" role="alert">
+            echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
                     Hasła nie są identyczne!
                   </div>';
         }
         if($_GET['error'] === 'incorrectpassword')
         {
-            echo '<div class="alert alert-danger" role="alert">
+            echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
                     Nieprawidłowe hasło!
                   </div>';
         }
         if($_GET['error'] === 'usernotfound')
         {
-            echo '<div class="alert alert-danger" role="alert">
+            echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
                     Nie znaleziono użyktownika o takim imieniu!
                   </div>';
         }
         if($_GET['error'] === 'loginnone')
         {
-            echo '<div class="alert alert-success" role="alert">
+            echo '<div class="alert alert-success rounded-0 text-center" role="alert">
                     Logowanie odbyło się poprawnie!
                   </div>';
             header("Refresh: 1; URL=$redirectURL");
         }
         if($_GET['error'] === 'registrationnone')
         {
-            echo '<div class="alert alert-success" role="alert">
+            echo '<div class="alert alert-success rounded-0 text-center" role="alert">
                     Rejestracja odbyła się poprawnie!
                   </div>';
             header("Refresh: 1; URL=$redirectURL");
         }
         if($_GET['error'] === 'changenone')
         {
-            echo '<div class="alert alert-success" role="alert">
+            echo '<div class="alert alert-success rounded-0 text-center" role="alert">
                     Dane zostały zmienione!
                   </div>';
         }
         if($_GET['error'] === "incart")
             {
-                echo '<div class="alert alert-danger" role="alert">
+                echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
                     Ten produkt już jest w twoim koszyku!
                   </div>';
                   header("URL=$redirectURL");
             }
         if($_GET['error'] === "cartnone")
         {
-            echo '<div class="alert alert-success" role="alert">
-                Produkt był dodany do koszyka!
+            echo '<div class="alert alert-success rounded-0 text-center" role="alert">
+                Produkt został dodany do koszyka!
                 </div>';
         }
     }
@@ -278,7 +278,7 @@ function writeTechData($conn, $id)
 
     foreach ($data as $attribute => $values) 
     {
-        echo "<div><strong>{$attribute}:</strong> ";
+        echo "<div class='mb-2'><strong>{$attribute}:</strong> ";
         foreach ($values as $value) 
         {
             echo "<span>$value</span> ";
@@ -655,39 +655,55 @@ function writeIfEmpty($string)
     else echo "$string";
 }
 
-function writeAllCartProducts($client_conn, $site_conn, $userID)
+function writeAllCartProducts($client_conn, $site_conn, $userID, $isSummaryPage = false)
 {
     $products = getUserCart_Product($client_conn, $site_conn, $userID);
 
-    foreach($products as $product)
-    {
-      $Name = $product['Name'];
-      $Image = $product['Image'];
-      $Quantity = $product['Quantity'];
-      $Price = $product['Price'] * $Quantity;
-      $ID = $product['ID'];
-      $productData = getProduct($site_conn, $ID);
-      $ProductQuantity = $productData['Quantity'];
-      
-      echo "<div class='row bg-light shadow-sm rounded-0 align-items-center justify-content-between mb-2'>
-                <div class='col-2' style=''>
-                    <a href='produktDane?id=$ID' class='' style='flex-shrink: 0; width: 120px; height: 120px;'>
-                        <img src='./images/$Image' alt='nazwa-zdjecia' class='img-fluid' style='object-fit: cover; width: 100%; height: 100%;'>
+    foreach ($products as $product) {
+        $Name = $product['Name'];
+        $Image = $product['Image'];
+        $Quantity = $product['Quantity'];
+        $Price = $product['Price'] * $Quantity;  // Total price
+        $ID = $product['ID'];
+        $productData = getProduct($site_conn, $ID);
+        $ProductQuantity = $productData['Quantity'];
+
+        // Początek budowy struktury dla każdego produktu
+        echo "<div class='row bg-light shadow-sm rounded-0 align-items-center justify-content-between mb-2'>
+                <div class='col-2'>
+                    <a href='produktDane?id=$ID' class='' style='flex-shrink: 0; width: 120px; height: 120px; background-color: white; display: flex; justify-content: center; align-items: center;'>
+                        <img src='./images/$Image' alt='nazwa-zdjecia' class='img-fluid p-2' style='object-fit: contain; max-width: 100%; max-height: 100%;'>
                     </a> 
                 </div>
                 <div class='col-6 d-flex align-items-center mt-3'>
                     <p><strong>$Name</strong></p>
-                </div>
-                <div class='col-2 d-flex align-items-center mt-3'>
+                </div>";
+
+
+        if ($isSummaryPage) {
+            // jeżeli na podsumowanie 
+            echo "<div class='col-2 d-flex align-items-center mt-3'>
+                    <p class='fs-4'>$Quantity</p>
+                  </div>
+                  <div class='col-2 d-flex align-items-center mt-3'>
                     <p class='fs-4'>$Price zł</p>
-                </div>
-                <div class='col-1 p-0'>
-                    <form action='include/updateNumberOfItemInCart.php' method='POST' id='ChaneNumberForm_$ID'>
-                        <input type='hidden' name='id' value='$ID'>
-                        <input type='number' class='form-control rounded-0' id='NumberOfItemns_$ID' name='NumberOfItemns' value='$Quantity' placeholder='' min='1' max='$ProductQuantity' onchange='document.getElementById(\"ChaneNumberForm_$ID\").submit()'>
-                    </form>
-                </div>
-                <div class='col-1'>
+                  </div>";
+        } else {
+            // jeżeli nie na podsumowanie 
+            echo "<div class='col-2 d-flex align-items-center mt-3'>
+                    <p class='fs-4'>$Price zł</p>
+                  </div>
+                  <div class='col-1 p-0'>
+                <form action='include/updateNumberOfItemInCart.php' method='POST' id='ChaneNumberForm_$ID'>
+                    <input type='hidden' name='id' value='$ID'>
+                    <input type='number' class='form-control rounded-0' id='NumberOfItemns_$ID' name='NumberOfItemns' value='$Quantity' placeholder='' min='1' max='$ProductQuantity' onchange='document.getElementById(\"ChaneNumberForm_$ID\").submit()'>
+                </form>
+              </div>";
+        }
+
+        // Pokazuje przycisk usówania tylko jeżeli wartość zmiennej $isSummaryPage równa się false
+        if (!$isSummaryPage) {
+            echo "<div class='col-1'>
                     <form action='include/deleteCartItem.php' method='POST'>
                         <input type='hidden' name='productID' value='$ID'>
                         <input type='hidden' name='price' value='$Price'>
@@ -697,11 +713,14 @@ function writeAllCartProducts($client_conn, $site_conn, $userID)
                             </svg>
                         </button>
                     </form>
-                </div>
-            </div>";
+                </div>";
+        }
 
+        echo "</div>";
     }
 }
+
+
 
 function getUserWishlistProducts($client_conn, $site_conn, $userID)
 {

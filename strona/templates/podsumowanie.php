@@ -25,12 +25,12 @@
 
     <div>
         <a  id="home" href="home">
-            <img src="strona/static/otherImages/GAME_TECH_LOGO.png" alt="Logo" width="90" height="80" class="d-inline-block align-top">
+            <img src="strona/static/otherImages/GAME_TECH_LOGO.png" alt="Logo" width="90" height="80" class="d-inline-block align-top my-3">
         </a>
     </div>
     
 
-    <div class="d-flex align-items-center justify-content-between position-relative" style="width: 70%;">
+    <div class="d-flex align-items-center justify-content-between position-relative d-none d-md-flex" style="width: 70%;">
 
         <div class="d-flex flex-column align-items-center mt-5">
             <a href="koszyk" class="btn custom-btn rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
@@ -41,9 +41,9 @@
         
  
         <div class="d-flex flex-column align-items-center mt-5 ms-4">
-            <button class="btn custom-btn rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
+            <a href="DostawaPlatnosc" class="btn custom-btn rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
                 <i class="bi bi-check-lg"></i>
-            </button>
+            </a>
             <p class="mt-2">Dostawa i Płatność</p> 
         </div>
         
@@ -139,14 +139,15 @@
         ?>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-9 border shadow p-3">
-        <h4>Dane odbiorcy przesyłki</h4>
+    <div class="row g-4">
+        <!-- Column 1 (Dane osobowe odbiorcy przesyłki and Wybór dostawcy, Forma płatności) -->
+        <div class="col-md-9">
+            <div class="border shadow-sm p-3">
+            <!-- Dane osobowe odbiorcy przesyłki -->
+            <h4>Dane odbiorcy przesyłki</h4>
             <?php if ($isCompany): ?>
-                <!-- Display company address block -->
-                <div class="p-3 position-relative">
-                    <button type="button" class="btn btn-link position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal2">Edytuj</button>
-                    <button type="button" class="btn btn-link position-absolute bottom-0 end-0 mb-3 me-3 p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal4">Usuń</button>
+                <div class="position-relative">
+                    <a href="DostawaPlatnosc" class="btn btn-link position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none">Zmień</a>
                     <p id="companyBill" class="fw-bold mb-0">Nazwa Firmy</p>      
                     <p id="nameBill" class="fw-bold mb-0"><?php echo "$Name" . " ". "$Surname"; ?></p>             
                     <p class="mb-0">Adress: <?php echo "$StreetFaktura"." "."$NumberFaktura"; ?></p>
@@ -160,10 +161,8 @@
                     <p class="mb-0"><?php echo "$Email"; ?></p> 
                 </div>
             <?php else: ?>
-                <!-- Display delivery address block -->
-                <div class="p-3 position-relative">
-                    <button type="button" class="btn btn-link position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal1">Edytuj</button>
-                    <button type="button" class="btn btn-link position-absolute bottom-0 end-0 mb-3 me-3 p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modal3">Usuń</button>
+                <div class="mb-3 position-relative">
+                    <a href="DostawaPlatnosc" class="position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none">Zmień</a>
                     <p class="fw-bold mb-0"><?php echo "$Name" . " ". "$Surname"; ?></p>       
                     <p class="mb-0">Adress: <?php echo "$StreetDostawa"." "."$NumberDostawa"; ?></p>
                     <p class="mb-0">Miasto: <?php echo "$Zip_CodeDostawa"." "."$CityDostawa"; ?></p>
@@ -175,46 +174,87 @@
                     <p class="mb-0"><?php echo "$Email"; ?></p>
                 </div>
             <?php endif; ?>
+            <!-- Wybór dostawcy -->
             <div class="border-bottom"></div>
-            <h4 class="mt-3">Wybór dostawcy</h4>
-            <p class="my-3">Nazwa</p>
+            <h4 class="my-3">Wybór dostawcy</h4>
+            <div class="d-flex alignt-items-center justify-content-between">
+                <div class="d-flex">
+                    <p class="me-3">Nazwa</p>
+                    <a href="DostawaPlatnosc" class="text-decoration-none">Zmień</a>
+                </div>
+                <p><strong>cena</strong></p>
+            </div>
+            <!-- Forma płatności -->
             <div class="border-bottom"></div>
             <h4 class="mt-3">Wybrana forma płatności</h4>
-            <!-- nie wiem czy nie powinno do tego jednak być jakiejś bazy. Robi się upierdliwie wpisywać to -->
-            <div class="d-flex align-items-center">
-            <img src="strona/static/otherImages/blik.svg" alt="" style="height: 20px;">
-                <p class="mt-3 ms-3">
-                    <small>Blik</small>
-                </p>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <div class="d-flex">
+                    <img src="strona/static/otherImages/blik.svg" alt="" style="height: 20px;" class="mt-1 me-3">
+                    <p class="me-3">Blik</p>
+                    <a href="DostawaPlatnosc" class="text-decoration-none">Zmień</a>
+                </div>
+                <p><strong>cena</strong></p>
             </div>
-
-
-
+            <div class="border-bottom"></div>
+            <h4 class="my-3">Twoj koszyk 
+                <?php
+                    require_once __DIR__ . '/..//../include/global.php';
+                    $userID = authorisedUser();
+                    if(!empty($userID))
+                    {
+                        $products = getUserCart_Product($client_conn, $site_conn, $userID);
+                        $total = 0;
+                        $amountOfProducts = 0;
+                        foreach($products as $product)
+                        {
+                            $price = $product['Price'];
+                            $quantity = $product['Quantity'];
+                            $total += ($price * $quantity);
+                            $amountOfProducts += 1;
+                        }
+                    }
+                    else { $amountOfProducts = 0; $total = 0; }
+                    echo "(" . $amountOfProducts . ")";
+                ?></h4>
+            <div> 
+                <?php
+                if(!empty($userID))
+                {
+                    writeAllCartProducts($client_conn, $site_conn, $userID, true);
+                }
+                ?>        
+            </div>
         </div>
-    
-
-            <!-- Smaller column (3 parts) -->
-            <div class="col-md-3 border shadow p-3" style="height: 260px;">
-                        <div class="d-flex justify-content-between">
-                            <p class="mt-3 p-0">Koszt produktów:</p>
-                            <p class="mt-2 p-0 fs-4"><strong>zł</strong></p>
+    </div>
+        <!-- Column 2 (Koszt produktów, Koszt dostawy, Do zapłaty, Dalej Button) -->
+        <div class="col-md-3 border shadow-sm p-3" style="height: 300px;">
+            <div class="d-flex justify-content-between">
+                            <p class="mt-2 p-0">Koszt produktów:</p>
+                            <p class="p-0 fs-4"><strong><?php echo $total?>zł</strong></p>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p class="mt-3 p-0">Koszt dostawy:</p>
-                            <p class="mt-2 p-0 fs-4"><strong> zł</strong></p>
+                            <p class="mt-2 p-0">Koszt dostawy:</p>
+                            <p class="p-0 fs-4"><strong>xxx</strong></p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mt-2 p-0">Koszt płatności:</p>
+                            <p class=" p-0 fs-4"><strong>xxx</strong></p>
                         </div>
                         <div class="border-bottom"></div>
-                        <div class="d-flex justify-content-between">
-                            <p class="mt-3 p-0">Do zapłaty:</p>
-                            <p class="mt-2 p-0 fs-4"><strong>zł</strong></p>
+                        <div class="d-flex justify-content-between mt-3">
+                            <p class="mt-2 p-0">Do zapłaty:</p>
+                            <p class="p-0 fs-4"><strong><?php echo $total?> zł</strong></p>
                         </div>
                         <button type="submit" form="formID" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
-                                    Dalej
+                            Zapłać
                         </button>
-            </div>   
+            </div>
+
+        
+        <a href="DostawaPlatnosc" class="btn custom-btn rounded-0 my-5">Powrót do Dostawa i Płatność</a>
     </div>
-    <a href="DostawaPlatnosc" class="btn custom-btn rounded-0 my-5">Powrót do Dostawa i Płatność</a>
 </div>
+
 
 
 

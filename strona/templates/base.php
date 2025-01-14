@@ -238,9 +238,9 @@
         </div>
       </div>
     </div>
-
+<main>
     {{ content }}
-
+            </main>
   
     <footer class="bg-light pt-5 d-flex flex-column align-items-center">
       <div class="container">

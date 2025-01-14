@@ -44,9 +44,6 @@
     background-color: #7b6dfa; /* Example background color on hover */
 }
 
-.dropdown {
-    /* position: relative;  Set the parent element to relative positioning */
-  }
 
   #dropdownMenuButtonKomputer:hover {
     background-color: white !important;
