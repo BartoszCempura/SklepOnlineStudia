@@ -59,6 +59,19 @@
               }
           }
 
+          if ($_SERVER['REQUEST_METHOD'] === 'POST')
+          {
+            if (isset($_POST['addProductToWishlist']) && isset($_POST['productID']) && isset($_POST['userID']))
+             {
+              $productID = $_POST['productID'];
+              $userID = $_POST['userID'];
+      
+
+              addProductToWishlist($client_conn, $productID, $userID);
+            }
+
+          }
+
             ?>
 
 <!---------------------------------------------------------------------------------------------------->

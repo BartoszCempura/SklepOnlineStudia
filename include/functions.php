@@ -146,6 +146,24 @@ function raiseMessageAndRedirect($redirectURL)
                 Produkt został dodany do koszyka!
                 </div>';
         }
+        if ($_GET['error'] === 'wishlist') {
+            echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
+                    Ten produkt już jest w twojej liście życzeń!
+                  </div>';
+        }
+        if ($_GET['error'] === 'wishlistnone') {
+            echo '<div class="alert alert-success rounded-0 text-center" role="alert">
+                    Produkt został dodany do wishlisty!
+                  </div>';
+        }
+        if ($_GET['error'] === 'wishlistdelete') {
+            echo '<div class="alert alert-check rounded-0 text-center" role="alert">
+                    Produkt został usunięty z wishlisty!
+                  </div>';
+        }
+
+
+        
     }
 }
 
@@ -434,7 +452,7 @@ function getUserCart_Product($clientConn, $siteConn, $userID)
 }
 
 
-
+//--------------------------------------------Add to whishlist || add to cart--------------------------------------------------
 function writeAllProducts($products)
 {
     $userID = authorisedUser();
@@ -464,8 +482,10 @@ function writeAllProducts($products)
             <p class='mt-2 fs-5'><strong>$price zł</strong></p>
     
             <div class='d-flex'>
-                <form action='include/addProductToWishlist.php' method='POST'>
-                    <button type='submit' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
+                <form method='POST'>
+                    <input type='hidden' name='productID' value='$id'>
+                    <input type='hidden' name='userID' value='$userID'>
+                    <button type='submit' name='addProductToWishlist' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
                         <i class='bi bi-heart fs-3'></i>
                     </button>
                 </form>
@@ -720,7 +740,7 @@ function writeAllCartProducts($client_conn, $site_conn, $userID, $isSummaryPage 
     }
 }
 
-
+//--------------------------------whishlist------------------------------------
 
 function getUserWishlistProducts($client_conn, $site_conn, $userID)
 {
@@ -766,6 +786,7 @@ function getUserWishlistProducts($client_conn, $site_conn, $userID)
 function writeUserWishListProducts($client_conn, $site_conn, $userID)
 {
     $products = getUserWishlistProducts($client_conn, $site_conn, $userID);
+    
 
     foreach($products as $product)
     {
@@ -776,24 +797,177 @@ function writeUserWishListProducts($client_conn, $site_conn, $userID)
       $price = $productData['Price'];
 
       echo "<div class='row bg-light shadow-sm rounded-0 align-items-center justify-content-between mb-2'>
-                <div class='col-2' style=''>
-                    <a href='produktDane?id=$ID' class='' style='flex-shrink: 0; width: 120px; height: 120px;'>
-                        <img src='./images/$Image' alt='nazwa-zdjecia' class='img-fluid' style='object-fit: cover; width: 100%; height: 100%;'>
+                <div class='col-2'>
+                    <a href='produktDane?id=$ID' class='' style='flex-shrink: 0; width: 120px; height: 120px; background-color: white; display: flex; justify-content: center; align-items: center;'>
+                        <img src='./images/$Image' alt='nazwa-zdjecia' class='img-fluid p-2' style='object-fit: contain; max-width: 100%; max-height: 100%;'>
                     </a> 
                 </div>
-                <div class='col-6 d-flex align-items-center mt-3'>
+                <div class='col-5 d-flex align-items-center mt-3'>
                     <p><strong>$Name</strong></p>
                 </div>
                 <div class='col-2 d-flex align-items-center mt-3'>
                     <p class='fs-4'>$price zł</p>
                 </div>
-                <div class='col-2 d-flex align-items-center mt-3'>
+                <div class='col-1 d-flex align-items-center justify-content-end'>
                     <button type='submit' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
                         <i class='bi bi-heart-fill fs-3'></i>
                     </button>
                 </div>
+                <div class='col-1 d-flex align-items-center justify-content-center'>
+                    <form action='include/addProductToCart.php' method='POST'>
+                        <input type='hidden' name='productID' value='$ID'>
+                        <input type='hidden' name='userID' value='$userID'>
+                        <button type='submit' class='btn custom-btn rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center;'>
+                            <i class='bi bi-cart fs-5'></i>
+                        </button> 
+                    </form>
+                </div>
+                <div class='col-1'>
+                    <form method='POST'>
+                        <input type='hidden' name='productID' value='$ID'>
+                        <input type='hidden' name='userID' value='$userID'>
+                        <button type='submit' name='RemoveFromWishlist' class='btn btn-light rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-trash3' viewBox='0 0 16 16'>
+                                <path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5'/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             </div>";
     }
+}
+
+function addProductToWishlist($client_conn, $productID, $userID) {
+
+    $checkQuery = "SELECT * FROM wishlist WHERE ProductID = ? AND UserID = ?";
+    $stmt = $client_conn->prepare($checkQuery);
+    $stmt->bind_param("ii", $productID, $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 0) {
+        // Insert if not already in the wishlist
+        $insertQuery = "INSERT INTO wishlist (ProductID, UserID) VALUES (?, ?)";
+        $insertStmt = $client_conn->prepare($insertQuery);
+        $insertStmt->bind_param("ii", $productID, $userID);
+        $insertStmt->execute();
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $referer_url = $_SERVER['HTTP_REFERER'];
+                $parsed_url = parse_url($referer_url);
+    
+                if (isset($parsed_url['query'])) {
+                    parse_str($parsed_url['query'], $query_params);
+    
+                    // Set 'error' parameter for wishlist conflict
+                    if (isset($query_params['error'])) {
+                        $query_params['error'] = 'wishlistnone';
+                    } else {
+                        $query_params['error'] = 'wishlistnone';
+                    }
+    
+                    // Rebuild the URL with the updated query
+                    $new_query = http_build_query($query_params);
+    
+                    $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+                    if (isset($parsed_url['path'])) {
+                        $new_url .= $parsed_url['path'];
+                    }
+                    if (!empty($new_query)) {
+                        $new_url .= '?' . $new_query;
+                    }
+                    if (isset($parsed_url['fragment'])) {
+                        $new_url .= '#' . $parsed_url['fragment'];
+                    }
+    
+                    // Redirect the user to the referring page with the error message
+                    header("Location: $new_url");
+                    exit;
+                }
+            }
+    } else {
+        // Product already exists in wishlist, handle error
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $referer_url = $_SERVER['HTTP_REFERER'];
+            $parsed_url = parse_url($referer_url);
+
+            if (isset($parsed_url['query'])) {
+                parse_str($parsed_url['query'], $query_params);
+
+                // Set 'error' parameter for wishlist conflict
+                if (isset($query_params['error'])) {
+                    $query_params['error'] = 'wishlist';
+                } else {
+                    $query_params['error'] = 'wishlist';
+                }
+
+                // Rebuild the URL with the updated query
+                $new_query = http_build_query($query_params);
+
+                $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+                if (isset($parsed_url['path'])) {
+                    $new_url .= $parsed_url['path'];
+                }
+                if (!empty($new_query)) {
+                    $new_url .= '?' . $new_query;
+                }
+                if (isset($parsed_url['fragment'])) {
+                    $new_url .= '#' . $parsed_url['fragment'];
+                }
+
+                // Redirect the user to the referring page with the error message
+                header("Location: $new_url");
+                exit;
+            }
+        }
+    }
+
+    $stmt->close();
+    $insertStmt->close();
+}
+
+function RemoveFromWishlist($client_conn, $productID, $userID) {
+//$cartProducts = getUserCart_Product($client_conn, $site_conn, $userID);
+$sql = "DELETE FROM wishlist WHERE UserID = ? AND ProductID = ?";
+    $stmt = $client_conn->prepare($sql);
+    $stmt->bind_param('ii', $userID, $productID);
+    $stmt->execute();
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $referer_url = $_SERVER['HTTP_REFERER'];
+            $parsed_url = parse_url($referer_url);
+
+            if (isset($parsed_url['query'])) {
+                parse_str($parsed_url['query'], $query_params);
+
+                // Set 'error' parameter for wishlist conflict
+                if (isset($query_params['error'])) {
+                    $query_params['error'] = 'wishlistdelete';
+                } else {
+                    $query_params['error'] = 'wishlistdelete';
+                }
+
+                // Rebuild the URL with the updated query
+                $new_query = http_build_query($query_params);
+
+                $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+                if (isset($parsed_url['path'])) {
+                    $new_url .= $parsed_url['path'];
+                }
+                if (!empty($new_query)) {
+                    $new_url .= '?' . $new_query;
+                }
+                if (isset($parsed_url['fragment'])) {
+                    $new_url .= '#' . $parsed_url['fragment'];
+                }
+
+                // Redirect the user to the referring page with the error message
+                header("Location: $new_url");
+                exit;
+            }
+        }
+
+    $stmt->close();
 }
 
 ?>
