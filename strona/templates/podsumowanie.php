@@ -208,8 +208,13 @@
                         <div class="border-bottom"></div>
                         <div class="d-flex justify-content-between mt-3">
                             <p class="mt-2 p-0">Do zapłaty:</p>
-                            <p class="p-0 fs-4"><strong><?php echo $total + $paymentMethod['price'] + $deliveryMethod['price']; ?> zł</strong></p>
+                            <p class="p-0 fs-4"><strong><?php $totalAll = $total + $paymentMethod['price'] + $deliveryMethod['price']; echo $totalAll; ?> zł</strong></p>
                         </div>
+                        <form action="include\processPurchase.php" id="formID" method="POST">
+                            <input type="hidden" name="total" value="<?php echo $totalAll; ?>">
+                            <input type="hidden" name="transactionID" value="<?php echo $transactionData['ID']; ?>">
+                            <input type="hidden" name="paymentMethodID" value="<?php echo $paymentMethod['id']; ?>">
+                        </form>
                         <button type="submit" form="formID" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
                             Zapłać
                         </button>

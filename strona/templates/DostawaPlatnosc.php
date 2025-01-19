@@ -13,13 +13,13 @@
     $Email = $user['Email'];
     
     $adress = getUserAddress($client_conn, $_SESSION['login']);
-    $CompanyName = $adress['CompanyName'];
-    $Nip = $adress['Nip'];
-    $Street = $adress['Street'];
-    $StreetNumber = $adress['Number'];
-    $Country = $adress['Country'];
-    $City = $adress['City'];
-    $ZipCode = $adress['Zip_Code'];
+    $CompanyName = $adress['CompanyName'] ?? "";
+    $Nip = $adress['Nip'] ?? "";
+    $Street = $adress['Street'] ?? "";
+    $StreetNumber = $adress['Number'] ?? "";
+    $Country = $adress['Country'] ?? "";
+    $City = $adress['City'] ?? "";
+    $ZipCode = $adress['Zip_Code'] ?? "";
 
 ?>
 
