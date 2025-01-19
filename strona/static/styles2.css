@@ -136,3 +136,23 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 1%;
 }
+
+/* style dla linków do kategorii przy wyszukiwaniu*/
+.styled-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.styled-link:hover {
+    color: #7b6dfa;
+    transform: scale(1.05);
+}
+.link-container {
+    margin: 5px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

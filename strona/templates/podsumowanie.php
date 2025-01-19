@@ -65,77 +65,42 @@
 
 <?php 
             require_once dirname(dirname(__DIR__)) . '/include/global.php';
-            if(isset($_SESSION['login']))
-            {
-                $user = getUser($client_conn, $_SESSION['login']);
-                $Name = $user['First_Name'];
-                $Surname = $user['Last_Name'];
-                $PhoneNumber = $user['Phone_Number'];
-                $Email = $user['Email'];
-
-                $faktura = getUserAddressByType($client_conn, $_SESSION['login'], 'billing');
-                $dostawa = getUserAddressByType($client_conn, $_SESSION['login'], 'shipping');
-
-                //to jest dla funkcji sprawdzającej czy check box jest zaznaczony
-                $isCompany = isset($_POST['isCompany']) && $_POST['isCompany'] == '1';
-                
-                if(!empty($faktura))
-                {
-                    $StreetFaktura = $faktura['Street'];
-                    $NumberFaktura = $faktura['Number'];
-                    $CountryFaktura = $faktura['Country'];
-                    $CityFaktura = $faktura['City'];
-                    $Zip_CodeFaktura = $faktura['Zip_Code'];
-                    $companyNameFaktura = $faktura['CompanyName'];
-                    $NipFaktura = $faktura['Nip']; 
-                }
-                else
-                {
-                    $StreetFaktura = "";
-                    $NumberFaktura = "";
-                    $CountryFaktura = "";
-                    $CityFaktura = "";
-                    $Zip_CodeFaktura = "";
-                    $companyNameFaktura = "";
-                    $NipFaktura = "";
-                }
-
-                if(!empty($dostawa))
-                {
-                    $StreetDostawa = $dostawa['Street'];
-                    $NumberDostawa = $dostawa['Number'];
-                    $CountryDostawa = $dostawa['Country'];
-                    $CityDostawa = $dostawa['City'];
-                    $Zip_CodeDostawa = $dostawa['Zip_Code'];
-                }
-                else
-                {
-                    $StreetDostawa = "";
-                    $NumberDostawa = "";
-                    $CountryDostawa = "";
-                    $CityDostawa = "";
-                    $Zip_CodeDostawa = "";
-                }
-            }
-            else
-            {
-                // OSTAVIT' |
-                //          v
-                $companyName = "";
-                $Nip = "";
-                $Street = "";
-                $Number = "";
-                $Country = "";
-                $City = "";
-                $Zip_Code = "";
-
-                $PhoneNumber = "";
-                $Email = "";
-                $Name = "";
-                $Surname = "";
-            }
-
             
+            $userID = authorisedUser();
+
+            $transactionData = getTransactionData($site_conn, $userID);
+
+            $deliveryMethod = getDeliveryMethodData($site_conn, $transactionData['DeliveryMethod']);
+            $userData = getUser($client_conn, $_SESSION['login']);
+            $PhoneNumber = $userData['Phone_Number'];
+            $Name = $userData['First_Name'];
+            $Surname = $userData['Last_Name'];
+            $Email = $userData['Email'];
+            
+            $words = preg_split('/\s+/', $transactionData['DeliveryAddress']); // pojedyncze slowa w łańcuchy address
+
+            if(end($words) == "shipping")
+            {
+                $StreetDostawa = $words[2];
+                $NumberDostawa = $words[3];
+                $CountryDostawa = $words[4];
+                $CityDostawa = $words[5];
+                $Zip_CodeDostawa = $words[6];
+                $isCompany = false;
+            }
+            else if(end($words) == "billing")
+            {
+                $Name = $words[2];
+                $NipFaktura = $words[3];
+                $StreetFaktura = $words[4];
+                $NumberFaktura = $words[5];
+                $CountryFaktura = $words[6];
+                $CityFaktura = $words[7];
+                $Zip_CodeFaktura = $words[8];
+                $isCompany = true;
+            }
+            $paymentMethod = getPaymentMethodData($site_conn, $words[0]);
+
         ?>
 
 <div class="container">
@@ -149,7 +114,7 @@
                 <div class="position-relative">
                     <a href="DostawaPlatnosc" class="btn btn-link position-absolute top-0 end-0 mt-3 me-3 p-0 text-decoration-none">Zmień</a>
                     <p id="companyBill" class="fw-bold mb-0">Nazwa Firmy</p>      
-                    <p id="nameBill" class="fw-bold mb-0"><?php echo "$Name" . " ". "$Surname"; ?></p>             
+                    <p id="nameBill" class="fw-bold mb-0"><?php echo "$Name"?></p>             
                     <p class="mb-0">Adress: <?php echo "$StreetFaktura"." "."$NumberFaktura"; ?></p>
                     <p class="mb-0">Miasto: <?php echo "$Zip_CodeFaktura"." "."$CityFaktura"; ?></p>
                     <p class="mb-0">Kraj: <?php echo "$CountryFaktura"; ?></p>
@@ -179,21 +144,21 @@
             <h4 class="my-3">Wybór dostawcy</h4>
             <div class="d-flex alignt-items-center justify-content-between">
                 <div class="d-flex">
-                    <p class="me-3">Nazwa</p>
+                    <p class="me-3"><?php $deliveryMethodData = getDeliveryMethodData($site_conn, $transactionData['DeliveryMethod']); echo $deliveryMethodData['name']?></p>
                     <a href="DostawaPlatnosc" class="text-decoration-none">Zmień</a>
                 </div>
-                <p><strong>cena</strong></p>
+                <p><strong>cena: <?php echo $deliveryMethod['price'] ?></strong></p>
             </div>
             <!-- Forma płatności -->
             <div class="border-bottom"></div>
             <h4 class="mt-3">Wybrana forma płatności</h4>
             <div class="d-flex align-items-center justify-content-between mt-3">
-                <div class="d-flex">
-                    <img src="strona/static/otherImages/blik.svg" alt="" style="height: 20px;" class="mt-1 me-3">
-                    <p class="me-3">Blik</p>
+                <div class="d-flex"> 
+                    <img src="strona/static/otherImages/<?php echo $paymentMethod['image']?>" alt="" style="height: 20px;" class="mt-1 me-3">
+                    <p class="me-3"><?php echo $paymentMethod['name']; ?></p>
                     <a href="DostawaPlatnosc" class="text-decoration-none">Zmień</a>
                 </div>
-                <p><strong>cena</strong></p>
+                <p><strong>cena: <?php echo $paymentMethod['price']; ?></strong></p>
             </div>
             <div class="border-bottom"></div>
             <h4 class="my-3">Twoj koszyk 
@@ -234,16 +199,16 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="mt-2 p-0">Koszt dostawy:</p>
-                            <p class="p-0 fs-4"><strong>xxx</strong></p>
+                            <p class="p-0 fs-4"><strong><?php echo $deliveryMethod['price']; ?></strong></p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="mt-2 p-0">Koszt płatności:</p>
-                            <p class=" p-0 fs-4"><strong>xxx</strong></p>
+                            <p class=" p-0 fs-4"><strong><?php echo $paymentMethod['price']; ?></strong></p>
                         </div>
                         <div class="border-bottom"></div>
                         <div class="d-flex justify-content-between mt-3">
                             <p class="mt-2 p-0">Do zapłaty:</p>
-                            <p class="p-0 fs-4"><strong><?php echo $total?> zł</strong></p>
+                            <p class="p-0 fs-4"><strong><?php echo $total + $paymentMethod['price'] + $deliveryMethod['price']; ?> zł</strong></p>
                         </div>
                         <button type="submit" form="formID" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
                             Zapłać

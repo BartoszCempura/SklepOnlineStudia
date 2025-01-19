@@ -8,6 +8,7 @@ if(!authorisedUser())
 
 $productID = trim(filter_var($_POST['productID'], FILTER_SANITIZE_SPECIAL_CHARS));
 $userID = trim(filter_var($_POST['userID'], FILTER_SANITIZE_SPECIAL_CHARS));
+$wishlistPage = $_POST['ifWishlistPage'];
 
 $cartProducts = getUserCart_Product($client_conn, $site_conn, $userID);
 
@@ -21,38 +22,45 @@ foreach ($cartProducts as $cartProduct) {
 
 if($productExists)
 {
-    if (isset($_SERVER['HTTP_REFERER'])) 
+    if(isset($wishlistPage))
     {
-        $referer_url = $_SERVER['HTTP_REFERER'];
-        $parsed_url = parse_url($referer_url);
-
-        if (isset($parsed_url['query'])) 
-        {
-            parse_str($parsed_url['query'], $query_params);
-
-            if (isset($query_params['error'])) 
-            {
-                $query_params['error'] = 'incart';
-            }
-            else { $query_params['error'] = 'incart'; }
-
-            $new_query = http_build_query($query_params);
-
-            $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
-            if (isset($parsed_url['path'])) {
-                $new_url .= $parsed_url['path'];
-            }
-            if (!empty($new_query)) {
-                $new_url .= '?' . $new_query;
-            }
-            if (isset($parsed_url['fragment'])) {
-                $new_url .= '#' . $parsed_url['fragment'];
-            }
-
-            header("Location: $new_url");
-            exit;
-        }
+        header("Location: /SklepOnlineStudia/index.php?page=ulubione&error=incart");   
     }
+    else
+    {
+        if (isset($_SERVER['HTTP_REFERER'])) 
+        {
+            $referer_url = $_SERVER['HTTP_REFERER'];
+            $parsed_url = parse_url($referer_url);
+
+            if (isset($parsed_url['query'])) 
+            {
+                parse_str($parsed_url['query'], $query_params);
+
+                if (isset($query_params['error'])) 
+                {
+                    $query_params['error'] = 'incart';
+                }
+                else { $query_params['error'] = 'incart'; }
+
+                $new_query = http_build_query($query_params);
+
+                $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+                if (isset($parsed_url['path'])) {
+                    $new_url .= $parsed_url['path'];
+                }
+                if (!empty($new_query)) {
+                    $new_url .= '?' . $new_query;
+                }
+                if (isset($parsed_url['fragment'])) {
+                    $new_url .= '#' . $parsed_url['fragment'];
+                }
+
+                header("Location: $new_url");
+                exit;
+            }
+        }
+    } 
 }
 
 else 
@@ -105,37 +113,45 @@ else
     $stmt5->bind_param('di', $price, $cartID);
     $stmt5->execute();
 
-    if (isset($_SERVER['HTTP_REFERER'])) 
+    if(isset($wishlistPage))
     {
-        $referer_url = $_SERVER['HTTP_REFERER'];
-        $parsed_url = parse_url($referer_url);
-    
-        if (isset($parsed_url['query'])) 
+        header("Location: /SklepOnlineStudia/index.php?page=ulubione&error=cartnone");   
+    }
+    else
+    {
+        if (isset($_SERVER['HTTP_REFERER'])) 
         {
-            parse_str($parsed_url['query'], $query_params);
-    
-            if (isset($query_params['error'])) 
+            $referer_url = $_SERVER['HTTP_REFERER'];
+            $parsed_url = parse_url($referer_url);
+        
+            if (isset($parsed_url['query'])) 
             {
-                $query_params['error'] = 'cartnone';
+                parse_str($parsed_url['query'], $query_params);
+        
+                if (isset($query_params['error'])) 
+                {
+                    $query_params['error'] = 'cartnone';
+                }
+                else { $query_params['error'] = 'cartnone'; }
+        
+                $new_query = http_build_query($query_params);
+        
+                $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+                if (isset($parsed_url['path'])) {
+                    $new_url .= $parsed_url['path'];
+                }
+                if (!empty($new_query)) {
+                    $new_url .= '?' . $new_query;
+                }
+                if (isset($parsed_url['fragment'])) {
+                    $new_url .= '#' . $parsed_url['fragment'];
+                }
+        
+                header("Location: $new_url");
+                exit;
             }
-            else { $query_params['error'] = 'cartnone'; }
-    
-            $new_query = http_build_query($query_params);
-    
-            $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
-            if (isset($parsed_url['path'])) {
-                $new_url .= $parsed_url['path'];
-            }
-            if (!empty($new_query)) {
-                $new_url .= '?' . $new_query;
-            }
-            if (isset($parsed_url['fragment'])) {
-                $new_url .= '#' . $parsed_url['fragment'];
-            }
-    
-            header("Location: $new_url");
-            exit;
         }
     }
+    
 }
 ?>

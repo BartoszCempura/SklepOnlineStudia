@@ -157,11 +157,10 @@ function raiseMessageAndRedirect($redirectURL)
                   </div>';
         }
         if ($_GET['error'] === 'wishlistdelete') {
-            echo '<div class="alert alert-check rounded-0 text-center" role="alert">
+            echo '<div class="alert alert-success rounded-0 text-center" role="alert">
                     Produkt został usunięty z wishlisty!
                   </div>';
         }
-
 
         
     }
@@ -242,7 +241,10 @@ function writeAllCategories($conn)
         if(!empty($_GET['input']))
         {
             $input = $_GET['input'];
-            echo "<a href='sklep?Category=$name&input=$input'>$name</a><br>";
+            echo "
+            <div class='link-container'>
+                <a class='styled-link' href='sklep?Category=$name&input=$input'>$name</a>
+            </div>";
         }
     }
 }
@@ -389,7 +391,7 @@ function getUserCart($client_conn, $userID)
         return false;
     }
 
-    $sql = "SELECT Total FROM clientdb.Cart
+    $sql = "SELECT * FROM clientdb.Cart
             WHERE clientdb.Cart.UserID = ?";
 
     
@@ -453,7 +455,7 @@ function getUserCart_Product($clientConn, $siteConn, $userID)
 
 
 //--------------------------------------------Add to whishlist || add to cart--------------------------------------------------
-function writeAllProducts($products)
+function writeAllProducts($products, $client_conn, $site_conn)
 {
     $userID = authorisedUser();
     echo "<div class='row'>";
@@ -484,10 +486,22 @@ function writeAllProducts($products)
             <div class='d-flex'>
                 <form method='POST'>
                     <input type='hidden' name='productID' value='$id'>
-                    <input type='hidden' name='userID' value='$userID'>
-                    <button type='submit' name='addProductToWishlist' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
-                        <i class='bi bi-heart fs-3'></i>
-                    </button>
+                    <input type='hidden' name='userID' value='$userID'>";
+                    if(ifInWishlist($client_conn, $site_conn, $userID, $id))
+                    {
+                        echo "
+                            <button type='submit' name='addProductToWishlist' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
+                                <i class='bi bi-heart-fill fs-3'></i>
+                            </button>";
+                    }
+                    else
+                    {
+                        echo "
+                            <button type='submit' name='addProductToWishlist' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
+                                <i class='bi bi-heart fs-3'></i>
+                            </button>";
+                    }
+                echo"
                 </form>
                 <form action='include/addProductToCart.php' method='POST'>
                     <input type='hidden' name='productID' value='$id'>
@@ -505,6 +519,20 @@ function writeAllProducts($products)
     }
 
     echo "</div>";
+}
+
+function ifInWishlist($client_conn, $site_conn, $userID, $productID)
+{
+    $wishlistProducts = getUserWishlistProducts($client_conn, $site_conn, $userID);
+
+    foreach($wishlistProducts as $wishListProduct)
+    {
+        if($wishListProduct['ID'] === $productID)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 
@@ -808,15 +836,11 @@ function writeUserWishListProducts($client_conn, $site_conn, $userID)
                 <div class='col-2 d-flex align-items-center mt-3'>
                     <p class='fs-4'>$price zł</p>
                 </div>
-                <div class='col-1 d-flex align-items-center justify-content-end'>
-                    <button type='submit' class='btn btn-light me-2 rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; color: #7b6dfa'>
-                        <i class='bi bi-heart-fill fs-3'></i>
-                    </button>
-                </div>
                 <div class='col-1 d-flex align-items-center justify-content-center'>
                     <form action='include/addProductToCart.php' method='POST'>
                         <input type='hidden' name='productID' value='$ID'>
                         <input type='hidden' name='userID' value='$userID'>
+                        <input type='hidden' name='ifWishlistPage' value='true'>
                         <button type='submit' class='btn custom-btn rounded-0' style='width: 48px; height: 48px; display: flex; justify-content: center; align-items: center;'>
                             <i class='bi bi-cart fs-5'></i>
                         </button> 
@@ -926,48 +950,77 @@ function addProductToWishlist($client_conn, $productID, $userID) {
     $insertStmt->close();
 }
 
-function RemoveFromWishlist($client_conn, $productID, $userID) {
-//$cartProducts = getUserCart_Product($client_conn, $site_conn, $userID);
+function RemoveFromWishlist($client_conn, $productID, $userID) 
+{
 $sql = "DELETE FROM wishlist WHERE UserID = ? AND ProductID = ?";
     $stmt = $client_conn->prepare($sql);
     $stmt->bind_param('ii', $userID, $productID);
-    $stmt->execute();
-
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $referer_url = $_SERVER['HTTP_REFERER'];
-            $parsed_url = parse_url($referer_url);
-
-            if (isset($parsed_url['query'])) {
-                parse_str($parsed_url['query'], $query_params);
-
-                // Set 'error' parameter for wishlist conflict
-                if (isset($query_params['error'])) {
-                    $query_params['error'] = 'wishlistdelete';
-                } else {
-                    $query_params['error'] = 'wishlistdelete';
-                }
-
-                // Rebuild the URL with the updated query
-                $new_query = http_build_query($query_params);
-
-                $new_url = $parsed_url['scheme'] . '://' . $parsed_url['host'];
-                if (isset($parsed_url['path'])) {
-                    $new_url .= $parsed_url['path'];
-                }
-                if (!empty($new_query)) {
-                    $new_url .= '?' . $new_query;
-                }
-                if (isset($parsed_url['fragment'])) {
-                    $new_url .= '#' . $parsed_url['fragment'];
-                }
-
-                // Redirect the user to the referring page with the error message
-                header("Location: $new_url");
-                exit;
-            }
-        }
-
-    $stmt->close();
+    
+    if($stmt->execute())
+    {
+        header("Location: ulubione?error=wishlistdelete");
+    }
 }
 
+function getPaymentMethodData($site_conn, $methodID)
+{
+    $sql = "SELECT * FROM sitedb.payment_method
+            WHERE sitedb.payment_method.ID = ?";
+
+    $stmt = $site_conn->prepare($sql);
+    $stmt->bind_param('i', $methodID); 
+    $stmt->execute();
+
+    $res = $stmt->get_result();
+    $method = $res->fetch_assoc();
+
+    if(empty($method))
+    {
+        return false;
+    }
+
+    return $method;
+}
+
+function getDeliveryMethodData($site_conn, $methodID)
+{
+    $sql = "SELECT * FROM sitedb.delivery_method
+            WHERE sitedb.delivery_method.ID = ?";
+
+    $stmt = $site_conn->prepare($sql);
+    $stmt->bind_param('i', $methodID); 
+    $stmt->execute();
+
+    $res = $stmt->get_result();
+    $method = $res->fetch_assoc();
+
+    if(empty($method))
+    {
+        return false;
+    }
+
+    return $method;
+}
+
+function getTransactionData($site_conn, $userID)
+{
+    $sql = "SELECT * FROM transaction WHERE UserID = ? ORDER BY ID DESC LIMIT 1";
+
+    $stmt = $site_conn->prepare($sql);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) 
+    {
+        $stmt->close();
+        return $row; 
+    } 
+    else 
+    {
+        $stmt->close();
+        return false;
+    }
+}
 ?>

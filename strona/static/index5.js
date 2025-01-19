@@ -44,7 +44,10 @@ function toggleFirmaFields(isChecked) {
     if (isChecked) {
         // Change placeholders for 'Firma' state
         nameField.placeholder = "Nazwa";
+        nameField.value = null;
         surnameField.placeholder = "NIP";
+        surnameField.value = null;
+        
 
         // Update column sizes to 7/5 ratio
         nameColumn.classList.remove('col-6');
@@ -69,4 +72,6 @@ function toggleCompanyCheckbox() {
     var isChecked = document.getElementById('gridCheckBuy').checked;
     document.getElementById('isCompany').value = isChecked ? "1" : "0";
 }
+
+
 

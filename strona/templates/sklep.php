@@ -36,11 +36,13 @@
                   $products = findCommon($productsFiltered, $productsSearched);
                   if (empty($products)) 
                   {
-                      echo "<p>Nie znaleziono produktów ;(</p>";
+                    echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
+                            Nie znaleziono produktów ;(
+                          </div>';
                   } 
                   else 
                   {
-                      writeAllProducts($products);
+                      writeAllProducts($products, $client_conn, $site_conn);
                   }
               } 
               else 
@@ -50,11 +52,13 @@
           
                   if (empty($products)) 
                   {
-                      echo "<p>Nie znaleziono produktów ;(</p>";
+                    echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
+                            Nie znaleziono produktów ;(
+                          </div>';
                   } 
                   else 
                   {
-                      writeAllProducts($products);
+                      writeAllProducts($products, $client_conn, $site_conn);
                   }
               }
           }

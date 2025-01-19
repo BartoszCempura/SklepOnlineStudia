@@ -5,8 +5,8 @@
             <?php
                 require_once dirname(dirname(__DIR__)) . '/include/global.php';
                 $userID = authorisedUser();
+                raiseMessageAndRedirect("#");
                 writeUserWishListProducts($client_conn, $site_conn, $userID);
-
                 if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 {
                   if (isset($_POST['RemoveFromWishlist']) && isset($_POST['productID']) && isset($_POST['userID']))
@@ -16,10 +16,7 @@
         
                     RemoveFromWishlist($client_conn, $productID, $userID);
                   }
-      
                 }
-      
-
             ?>
         </div>
     </div>
