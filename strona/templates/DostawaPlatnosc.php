@@ -154,21 +154,39 @@
                     <div class="col border shadow-sm p-3 ">
                     <h4 class="mb-3">Wybór dostawcy</h4>
                         <p>Wybierz preferowaną formę dostawy!</p>
-                            <div class="form-check d-flex align-items-center mb-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="form-check d-flex align-items-center ">
                                 <input class="form-check-input rounded-0 me-3" form="formID" type="radio" name="radioDelivery" value="2" id="gridCheckDeliveryExpress"></input>
                                     <label class="form-check-label" for="gridCheckDeliveryExpress">
-                                        <small>Kurier express +5,99 zł</small>
+                                        <small>Kurier express</small>
                                     </label>
                                     <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Dostawa zamwienia zostanie zrealizowana na terenie Polski za pośrednictwem jednej z firm kurierskich. Zamwienie dotrze do Ciebie w ciąguokoło 1 dnia roboczego od momentu wysyłki. Przewoźnicy, z ktrymi wspłpracujemy to m.in.: GLS (większość zawień), DPD, Geis (w przypadku większych gabarytw) orazZadbano i SUUS (w przypadku wniesienia i montażu produktw AGD i RTV)"></i>
                             </div>
+                            <p class="mt-1"><strong>
+                                        <?php 
+                                            $deliveryData = getDeliveryMethodData($site_conn, 2); 
+                                            echo $deliveryData['price'];
+                                        ?> 
+                                    zł
+                                </strong></p>
+                            </div>
                             <div class="border-bottom"></div>
-                            <div class="form-check d-flex align-items-center my-3">
-                                <input class="form-check-input rounded-0 me-3" form="formID" type="radio" name="radioDelivery" value="1"  checked="true" id="gridCheckDeliveryStandard"></input>
+                            <div class="d-flex justify-content-between my-2">
+                            <div class="form-check d-flex align-items-center ">
+                                <input class="form-check-input rounded-0 me-3" form="formID" type="radio" name="radioDelivery" value="1" id="gridCheckDeliveryStandard" checked></input>
                                     <label class="form-check-label" for="gridCheckDeliveryStandard">
                                         <small>Kurier standard</small>
                                     </label>
                                     <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Dostawa zamwienia zostanie zrealizowana na terenie Polski. Zamwienie dotrze do Ciebie w ciągu około 2 dni roboczych od momentu wysyłki. Przewoźnicy z ktrymi wspłpracujemy to m.in.: GLS, DPD i Poczta Polska."></i>
                             </div>
+                            <p  class="mt-1"><strong>
+                                        <?php 
+                                            $deliveryData = getDeliveryMethodData($site_conn, 1); 
+                                            echo $deliveryData ['price'];
+                                        ?> 
+                                    zł
+                                </strong></p>
+                        </div>
                     </div>
                 </div>
                 
@@ -185,8 +203,8 @@
                                         </label>
                                 </div>
                                 <p><strong>
-                                    Cena:
                                         <?php 
+                                        //
                                             $paymentData = getPaymentMethodData($site_conn, 1); 
                                             echo $paymentData['price'];
                                         ?> 
@@ -203,7 +221,6 @@
                                         </label>
                                 </div>
                                 <p class="pt-3"><strong>
-                                    Cena:
                                         <?php 
                                             $paymentData = getPaymentMethodData($site_conn, 2); 
                                             echo $paymentData['price'];
@@ -221,7 +238,6 @@
                                         </label>
                                 </div>
                                 <p class="pt-3"><strong>
-                                    Cena:
                                         <?php 
                                             $paymentData = getPaymentMethodData($site_conn, 3); 
                                             echo $paymentData['price'];
@@ -240,7 +256,6 @@
                                         <i class="bi bi-info-square ms-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Bezpieczna płatność przez internet kartą kredytową lub debetową. Do realizacji transakcji wykorzystujemy system Przelewy24."></i>
                                 </div>
                                 <p class="pt-3"><strong>
-                                    Cena:
                                         <?php 
                                             $paymentData = getPaymentMethodData($site_conn, 4); 
                                             echo $paymentData['price'];
@@ -261,11 +276,21 @@
             </div>
             <div class="d-flex justify-content-between">
                 <p class="mt-2 p-0">Koszt dostawy:</p>
-                <p class="p-0 fs-4"><strong>xxx</strong></p>
+                <p class="p-0 fs-4"><strong id="deliveryPrice">
+                    <?php 
+                        $deliveryData = getDeliveryMethodData($site_conn, 1); //default
+                        echo $deliveryData['price'] . " zł"; 
+                    ?>
+                </strong></p>
             </div>
             <div class="d-flex justify-content-between">
                 <p class="mt-2 p-0">Koszt płatności:</p>
-                <p class="p-0 fs-4"><strong>xxx</strong></p>
+                <p class="p-0 fs-4" ><strong id="paymentPrice">
+                <?php 
+                        $paymentData = getPaymentMethodData($site_conn, 1); 
+                        echo $paymentData['price'] . " zł";
+                ?> 
+                </strong></p>
             </div>
             <div class="border-bottom"></div>
             <div class="d-flex justify-content-between mt-3">
@@ -281,6 +306,62 @@
 </div> 
 </div>
 
+
+<script>
+// Nasłuchujemy zmian na radio buttonach dla dostawy
+document.querySelectorAll('input[name="radioDelivery"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const methodID = this.value; // Pobieramy value zaznaczonego radio buttona
+        updateDeliveryPrice(methodID); // Funkcja AJAX do zaktualizowania ceny dostawy
+    });
+});
+
+function updateDeliveryPrice(methodID) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost/SklepOnlineStudia/include/get_delivery_price.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.send("methodID=" + methodID);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            document.getElementById('deliveryPrice').innerHTML = response + " zł";
+        } else {
+            console.error("Błąd podczas ładowania ceny dostawy");
+        }
+    };
+}
+</script>
+
+<script>
+// Nasłuchujemy zmian na radio buttonach dla płatności
+document.querySelectorAll('input[name="paymentRadio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const methodID = this.value; // Pobieramy value zaznaczonego radio buttona
+        updatePaymentPrice(methodID); // Funkcja AJAX do zaktualizowania ceny płatności
+    });
+});
+
+function updatePaymentPrice(methodID) {
+    console.log('Wybrano metodę płatności: ' + methodID);  // Sprawdzenie, czy metoda jest poprawnie przekazywana
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost/SklepOnlineStudia/include/get_payment_price.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.send("methodID=" + methodID);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const response = xhr.responseText;
+            document.getElementById('paymentPrice').innerHTML = response + " zł";
+        } else {
+            console.error("Błąd podczas ładowania ceny płatności");
+        }
+    };
+}
+</script>
 
 
 <script>document.getElementById('gridCheckBuy').addEventListener('change', function() {

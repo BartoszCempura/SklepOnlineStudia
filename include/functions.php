@@ -144,7 +144,7 @@ function raiseMessageAndRedirect($redirectURL)
         {
             echo '<div class="alert alert-success rounded-0 text-center" role="alert">
                 Produkt został dodany do koszyka!
-                </div>';
+                </div>'; 
         }
         if ($_GET['error'] === 'wishlist') {
             echo '<div class="alert alert-danger rounded-0 text-center" role="alert">
@@ -153,7 +153,7 @@ function raiseMessageAndRedirect($redirectURL)
         }
         if ($_GET['error'] === 'wishlistnone') {
             echo '<div class="alert alert-success rounded-0 text-center" role="alert">
-                    Produkt został dodany do wishlisty!
+                    Produkt został dodany do wishlisty!                
                   </div>';
         }
         if ($_GET['error'] === 'wishlistdelete') {
@@ -161,7 +161,18 @@ function raiseMessageAndRedirect($redirectURL)
                     Produkt został usunięty z wishlisty!
                   </div>';
         }
+        if ($_GET['error'] === 'purchasesuccess') {
+            echo '<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="alert alert-success rounded-0 d-flex flex-column align-items-center justify-content-center p-5" role="alert">
+            <strong>Dziękujemy za wspólne zakupy :)</strong>
+            <img src="strona/static/otherImages/thumbs-up.png" alt="" class="mt-4" style="height: 100px;">
+        </div>
+      </div>';
 
+                header("Refresh: 2; URL=home");
+                exit(); 
+        }
+        
         
     }
 }
@@ -1023,4 +1034,79 @@ function getTransactionData($site_conn, $userID)
         return false;
     }
 }
+
+function completeTransaction($site_conn, $client_conn, $transactionID, $paymentMethodID, $total) {
+    $transactionID = trim(filter_var($transactionID, FILTER_SANITIZE_SPECIAL_CHARS));
+    $paymentMethodID = trim(filter_var($paymentMethodID, FILTER_SANITIZE_SPECIAL_CHARS));
+    $total = trim(filter_var($total, FILTER_SANITIZE_SPECIAL_CHARS));
+    $date = date("Y-m-d H:i:s");
+    $status = "Pending";
+    $userID = authorisedUser();
+    $cart = getUserCart($client_conn, $userID);
+    
+    // Change status of the transaction to "Completed"
+    $sql = "UPDATE sitedb.transaction
+            SET Status = 'Completed'
+            WHERE ID = ?";
+    $stmt = $site_conn->prepare($sql);
+    $stmt->bind_param('i', $transactionID);
+    $stmt->execute();
+
+    // Insert into transaction_products the whole cart_product
+    $products = getUserCart_Product($client_conn, $site_conn, $userID);
+
+    foreach ($products as $product) {
+        $productID = $product['ID'];
+        $productQuantity = $product['Quantity'];
+        $productPrice = $product['Price'];
+        $insertTransactionProducts = "INSERT INTO sitedb.transaction_products(TransactionID, ProductID, Quantity, Price)
+                                      VALUES (?, ?, ?, ?)";
+        $stmt2 = $site_conn->prepare($insertTransactionProducts);
+        $stmt2->bind_param('iiid', $transactionID, $productID, $productQuantity, $productPrice);
+        $stmt2->execute();
+    }
+
+    // Insert payment data into the payment table
+    $paymentdataSql = "INSERT INTO sitedb.payment(TransactionID, Amount, Status, PaymentDate, PaymentMethod)
+                       VALUES(?, ?, ?, ?, ?)";
+    $stmt3 = $site_conn->prepare($paymentdataSql);
+    $stmt3->bind_param('idssi', $transactionID, $total, $status, $date, $paymentMethodID);
+    $stmt3->execute();
+
+    // Update the quantity of products in the product table
+    foreach ($products as $product) {
+        $productQuantity = $product['Quantity'];
+        $productID = $product['ID'];
+        $extractProductQuantity = "UPDATE sitedb.Product
+                                   SET Quantity = Quantity - ?
+                                   WHERE Product.ID = ?";
+        $stmt4 = $site_conn->prepare($extractProductQuantity);
+        $stmt4->bind_param('ii', $productQuantity, $productID);
+        $stmt4->execute();
+    }
+
+    // Clear the user cart_product table
+    foreach ($products as $product) {
+        $productID = $product['ID'];
+        $deletefromCart_Products = "DELETE FROM clientdb.Cart_Products
+                                    WHERE ProductID = ? AND CartID = ?";
+        $stmt5 = $site_conn->prepare($deletefromCart_Products);
+        $stmt5->bind_param('ii', $productID, $cart['ID']);
+        $stmt5->execute();
+    }
+
+    // Set cart total to 0
+    $cartTotal = "UPDATE clientdb.Cart
+                  SET Total = 0
+                  WHERE ID = ?";
+    $stmt6 = $site_conn->prepare($cartTotal);
+    $stmt6->bind_param('i', $cart['ID']);
+
+    if ($stmt6->execute()) {
+        header("Location: podsumowanie?error=purchasesuccess");
+
+    }
+}
+
+
 ?>

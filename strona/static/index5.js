@@ -67,11 +67,3 @@ function toggleFirmaFields(isChecked) {
     }
 }
 
-// funkcja sprawdzająca czy na stronie DostawaPlatnosc był zaznacony check box dla Firma
-function toggleCompanyCheckbox() {
-    var isChecked = document.getElementById('gridCheckBuy').checked;
-    document.getElementById('isCompany').value = isChecked ? "1" : "0";
-}
-
-
-
