@@ -295,7 +295,7 @@
             <div class="border-bottom"></div>
             <div class="d-flex justify-content-between mt-3">
                 <p class="mt-2 p-0">Do zapłaty:</p>
-                <p class="p-0 fs-4"><strong><?php echo $total; ?> zł</strong></p>
+                <p class="p-0 fs-4 "><strong class="total-price"><?php echo $total?> zł</strong></p>
             </div>
 
                 <button form="formID" class="btn custom-btn rounded-0 w-100 mb-1 text-decoration-none">
@@ -306,67 +306,13 @@
 </div> 
 </div>
 
-
 <script>
-// Nasłuchujemy zmian na radio buttonach dla dostawy
-document.querySelectorAll('input[name="radioDelivery"]').forEach(radio => {
-    radio.addEventListener('change', function() {
-        const methodID = this.value; // Pobieramy value zaznaczonego radio buttona
-        updateDeliveryPrice(methodID); // Funkcja AJAX do zaktualizowania ceny dostawy
-    });
-});
-
-function updateDeliveryPrice(methodID) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost/SklepOnlineStudia/include/get_delivery_price.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.send("methodID=" + methodID);
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const response = xhr.responseText;
-            document.getElementById('deliveryPrice').innerHTML = response + " zł";
-        } else {
-            console.error("Błąd podczas ładowania ceny dostawy");
-        }
-    };
-}
-</script>
-
-<script>
-// Nasłuchujemy zmian na radio buttonach dla płatności
-document.querySelectorAll('input[name="paymentRadio"]').forEach(radio => {
-    radio.addEventListener('change', function() {
-        const methodID = this.value; // Pobieramy value zaznaczonego radio buttona
-        updatePaymentPrice(methodID); // Funkcja AJAX do zaktualizowania ceny płatności
-    });
-});
-
-function updatePaymentPrice(methodID) {
-    console.log('Wybrano metodę płatności: ' + methodID);  // Sprawdzenie, czy metoda jest poprawnie przekazywana
-    
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost/SklepOnlineStudia/include/get_payment_price.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.send("methodID=" + methodID);
-
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const response = xhr.responseText;
-            document.getElementById('paymentPrice').innerHTML = response + " zł";
-        } else {
-            console.error("Błąd podczas ładowania ceny płatności");
-        }
-    };
-}
-</script>
-
-
-<script>document.getElementById('gridCheckBuy').addEventListener('change', function() {
-    toggleFirmaFields(this.checked);
-});</script>
+    // Funkcja do aktualizacji całkowitej ceny
+function updateTotalPrice() {
+    const productTotal = <?php echo $total; ?>; // Pobieramy początkową cenę produktów z PHP
+    const total = productTotal + deliveryPrice + paymentPrice; // Obliczamy całkowitą cenę
+    document.querySelector('.total-price').innerHTML = total.toFixed(2) + " zł"; // Aktualizujemy całkowitą cenę na stronie
+}</script>
 
 <script>
   // Initialize tooltips
@@ -376,6 +322,6 @@ function updatePaymentPrice(methodID) {
   });
 </script>
 
-<script src="strona/static/index5.js"></script>
+<script src="strona/static/DeliveryPayment.js"></script>
 </body>
 </html>
