@@ -46,17 +46,16 @@
   </head> 
 <body>
 
-<header class="container d-flex align-items-center justify-content-around w-50">
-    
-
-    <div>
+<header class="container">
+    <div class="row">
+    <div class="col-md-3 d-flex align-items-center justify-content-center">
         <a  id="home" href="home">
             <img src="strona/static/otherImages/GAME_TECH_LOGO.png" alt="Logo" width="90" height="80" class="d-inline-block align-top">
         </a>
     </div>
     
-
-    <div class="d-flex align-items-center justify-content-between position-relative" style="width: 70%;">
+<div class="col-md-9 my-2">
+    <div class="d-flex align-items-center justify-content-between position-relative d-none d-md-flex" style="width: 70%;">
 
         <div class="d-flex flex-column align-items-center mt-5">
             <a href="koszyk" class="btn custom-btn rounded-0 d-flex align-items-center justify-content-center p-1" style="height:40px; width:40px;">
@@ -87,6 +86,8 @@
             <div class="border border-3 border-secondary w-75"></div>
         </div>
     </div>
+</div>
+</div>
 </header>
 
 <div class="container">

@@ -1,5 +1,5 @@
 <h2 align="center" class="mt-4">Ustawienia konta</h2>
-<div class="container mt-4 mb-4 border shadow p-3 w-25" style="caret-color: transparent;">
+<div class="container mt-4 mb-4 border shadow p-3 w-sm-25" style="caret-color: transparent;">
     <?php raiseMessageAndRedirect("ustawieniaKonta.php"); ?>
     <h3 class="mb-3">Dane konta</h3>
     <p class="mb-2">Twoje dane</p>

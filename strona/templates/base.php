@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous">
         
-        <link rel="stylesheet" href="strona/static/styles2.css"> 
+        <link rel="stylesheet" href="strona/static/styles5.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
    <!-- <link rel="stylesheet" href="fontawesome-pro-5.15.3-web\fontawesome-pro-5.15.3-web\css\all.css"/> -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -23,11 +23,11 @@
     <div class="" style="background-color: rgb(226, 223, 223);">
 
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^nav menu^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <div class="container-fluid">
-        <div class="row w-100 mx-5">
+    <nav class="navbar navbar-expand-md navbar-light bg-light d-flex flex-column">
+      <div class="container">
+        <div class="row w-100">
           <!-- Logo -->
-          <div class="col-3 d-flex align-items-center">
+          <div class="col-6 col-md-3 d-flex align-items-center">
             <a class="navbar-brand" id="home" href="home">
               <img src="strona/static/otherImages/GAME_TECH_LOGO.png" alt="Logo" width="90" height="80"
                 class="d-inline-block align-top">
@@ -35,27 +35,24 @@
           </div>
     
           <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Serach bar kontener środkowy@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --> 
-          <div class="col-6 d-flex justify-content-center align-items-center">
-          <form action="include\search.php" method="POST">
-            <div class="input-group shadow-sm" style="max-width: 450px;">
-              <span class="input-group-text rounded-0" id="Wyszukaj">
-              <button class="btn p-0 border-0 d-flex justify-content-center" style="background: none;" aria-label="Search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search hover-fill"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
-                  </path>
-                </svg>
-              </button>
-              </span>
-              <input type="text" class="form-control rounded-0" name="searchInput" placeholder="Wyszukaj" aria-label="Wyszukaj"
-                aria-describedby="Wyszukaj">
+          <div class="col-6 d-flex justify-content-center align-items-center d-none d-md-flex">
+            <form action="include\search.php" method="POST" class="mx-auto">
+              <div class="input-group shadow-sm" style="max-width: 450px;">
+                <span class="input-group-text rounded-0" id="Wyszukaj">
+                  <button class="btn p-0 border-0 d-flex justify-content-center" style="background: none;" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search hover-fill" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                    </svg>
+                  </button>
+                </span>
+                <input type="text" class="form-control rounded-0" name="searchInput" placeholder="Wyszukaj" aria-label="Wyszukaj" aria-describedby="Wyszukaj">
               </div>
-              </form>
-            </div>
+            </form>
+          </div>
+
     
           <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@IKONY PO PRAWEJ STRONIE KONTENER @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-          <div class="col-3 d-flex justify-content-center align-items-center">
+          <div class="col-6 col-md-3 d-flex justify-content-end align-items-center">
             <?php 
               if(!authorisedUser()){
               echo '<a class="btn btn-light rounded-0" aria-label="ulubione" href="logowanie" style="width: 64px; height: 64px; display: flex; justify-content: center; align-items: center;">
@@ -164,6 +161,23 @@
           <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
         </div>
       </div>
+      <!-- search bar pojawiający się przy small screen -->
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center d-block d-md-none">
+              <form action="include\search.php" method="POST" class="mx-auto">
+                <div class="input-group shadow-sm" style="max-width: 450px;">
+                  <span class="input-group-text rounded-0" id="Wyszukaj">
+                    <button class="btn p-0 border-0 d-flex justify-content-center" style="background: none;" aria-label="Search">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search hover-fill" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                      </svg>
+                    </button>
+                  </span>
+                  <input type="text" class="form-control rounded-0" name="searchInput" placeholder="Wyszukaj" aria-label="Wyszukaj" aria-describedby="Wyszukaj">
+                </div>
+              </form>
+            </div>
+      </div>
     </nav>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-->
 
@@ -244,10 +258,10 @@
   
     <footer class="bg-light pt-5 d-flex flex-column align-items-center">
       <div class="container">
-        <div class="row text-center text-md-start">
+        <div class="row">
           <!-- Kontakt -->
           <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
-            <h5 class="fw-bold mb-3" style="margin-right: 170px;">Kontakt</h5>
+            <h5 id="kontakt-header" class="fw-bold mb-3">Kontakt</h5>
             <ul class="list-unstyled">
               <li class="mb-3">
               <i class="bi bi-telephone me-2"></i>
@@ -266,7 +280,7 @@
           
           <!-- Produkty -->
           <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
-            <h5 class="fw-bold" style="margin-right: 65px;">Produkty</h5>
+            <h5 id="produkty-header" class="fw-bold">Produkty</h5>
             <ul class="list-unstyled text-hover-footer">
               <li><a href="#" class="text-decoration-none fw-bold">Promocje</a></li>
               <li><a href="#" class="text-decoration-none fw-bold">Nowości</a></li>
@@ -276,7 +290,7 @@
           </div>
           <!-- Informacja -->
           <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
-            <h5 class="fw-bold" style="margin-right: 130px;">Informacja</h5>
+            <h5 id="informacja-header" class="fw-bold">Informacja</h5>
             <ul class="list-unstyled text-hover-footer">
               <li><a href="#" class="text-decoration-none fw-bold">Dostawa i płatności</a></li>
               <li><a href="#" class="text-decoration-none fw-bold">Kredyt</a></li>
@@ -287,7 +301,7 @@
           </div>
           <!-- O sklepie -->
           <div class="col-md-3 mb-4 d-flex flex-column align-items-center justify-content-start">
-            <h5 class="fw-bold" style="margin-right: 80px;">O sklepie</h5>
+            <h5 id="sklep-header" class="fw-bold">O sklepie</h5>
             <ul class="list-unstyled text-hover-footer">
               <li><a href="#" class="text-decoration-none fw-bold">O nas</a></li>
               <li><a href="#" class="text-decoration-none fw-bold">Regulamin</a></li>
@@ -299,7 +313,7 @@
           </div>
         </div>
       </div>
-      <p>@ 2024-2025 SklepOnline by Bartosz Cempura and Yaroslav Chausov </p>
+      <p class="text-center">@ 2024-2025 SklepOnline by Bartosz Cempura and Yaroslav Chausov </p>
     </footer>
     
     <style>

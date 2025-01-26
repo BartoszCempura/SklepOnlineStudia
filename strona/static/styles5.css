@@ -156,3 +156,33 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+#kontakt-header, #produkty-header, #informacja-header, #sklep-header {
+  margin-right: 0;
+}
+
+
+@media (min-width: 768px) {
+  #kontakt-header {
+    margin-right: 170px;
+  }
+
+  #produkty-header {
+    margin-right: 65px;
+  }
+
+  #informacja-header {
+    margin-right: 130px;
+  }
+
+  #sklep-header {
+    margin-right: 80px;
+  }
+  
+}
+
+@media (min-width: 576px) { /* sm */
+  .w-sm-25 {
+    width: 25%;
+  }
+}

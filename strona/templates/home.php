@@ -47,7 +47,7 @@
 <div class="container-fluid my-4">
   <div class="row mb-3">
     <!-- First Row First Column -->
-    <div class="col-4">
+    <div class="col-md-4">
       <a href="produktDane?id=4" style="text-decoration: none;">
         <div class="p-3 bg-light shadow-sm rounded-0 text-center">
           <h2 style="color: #353839"><strong>Hit miesiąca!</strong></h2><br>
@@ -60,7 +60,7 @@
     </div>
     
     <!-- First Row Second Column -->
-    <div class="col-8" id="promocje">
+    <div class="col-md-8" id="promocje">
       <div class="p-3 bg-light shadow-sm rounded-0">
         <!-- Title -->
         <div class="row mb-3">
@@ -68,105 +68,120 @@
             <h3 class="text-center" style='color: #353839'><strong>Gorące promki</strong></h3>
           </div>
         </div>
-        <div class="row row-cols-4 g-3">
-          <!-- Products -->
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=1" style="text-decoration: none; color: #353839">
-                <img src="images/iphone15promax.jpg" class="card-img-top img-fluid" alt="Product 1" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Iphone 15 Pro Max 256GB</h6>
-                  <p class="card-text">Cena: <s>5490.90 zł</s></p>
-                  <p class="card-text"><strong>5199.00 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=7" style="text-decoration: none; color: #353839">
-                <img src="images/lenovotab.jpg" class="card-img-top img-fluid" alt="Product 2" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Tablet LENOVO Tab M11 + Rysik</h6>
-                  <p class="card-text">Cena: <s>699.90 zł</s></p>
-                  <p class="card-text"><strong>649.00 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=6" style="text-decoration: none; color: #353839">
-                <img src="images/redragon.jpg" class="card-img-top img-fluid" alt="Product 3" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Mysz REDRAGON M916AK-PRO</h6>
-                  <p class="card-text">Cena: <s>299.99 zł</s></p>
-                  <p class="card-text"><strong>249.99 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=3" style="text-decoration: none; color: #353839">
-                <img src="images/Lenovo legion 5-16.jpg" class="card-img-top img-fluid" alt="Product 4" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Lenovo Legion 5-16</h6>
-                  <p class="card-text">Cena: <s>6499.00 zł</s></p>
-                  <p class="card-text"><strong>6199.00 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=2" style="text-decoration: none; color: #353839">
-                <img src="images/samsunggalaxys24ultra.jpg" class="card-img-top img-fluid" alt="Product 5" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Samsung Galaxy S24 Ultra 512GB</h6>
-                  <p class="card-text">Cena: <s>4999.99 zł</s></p>
-                  <p class="card-text"><strong>4799.99 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=5" style="text-decoration: none; color: #353839">
-                <img src="images/razer basilisk v3.jpg" class="card-img-top img-fluid" alt="Product 6" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Razer Basilisk V3</h6>
-                  <p class="card-text">Cena: <s>189.99 zł</s></p>
-                  <p class="card-text"><strong>169.99 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=8" style="text-decoration: none; color: #353839">
-                <img src="images/iphone16pink.jpg" class="card-img-top img-fluid" alt="Product 7" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Apple Iphone 16 Pink 128GB</h6>
-                  <p class="card-text">Cena: <s>4099.00 zł</s></p>
-                  <p class="card-text"><strong>3899.00 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100" style="border: none;">
-              <a href="produktDane?id=9" style="text-decoration: none; color: #353839">
-                <img src="images/macbookm4.jpg" class="card-img-top img-fluid" alt="Product 8" style="max-height: 150px; object-fit: contain;">
-                <div class="card-body text-center">
-                  <h6 class="card-title">Laptop APPLE MacBook Pro 2024</h6>
-                  <p class="card-text">Cena: <s>11490.00</s></p>
-                  <p class="card-text"><strong>10499.00 zł</strong></p>
-                </div>
-              </a>
-            </div>
-          </div>
+        <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-3">
+  <!-- Product 1 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=1" style="text-decoration: none; color: #353839">
+        <img src="images/iphone15promax.jpg" class="card-img-top img-fluid" alt="Product 1" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Iphone 15 Pro Max 256GB</h6>
+          <p class="card-text">Cena: <s>5490.90 zł</s></p>
+          <p class="card-text"><strong>5199.00 zł</strong></p>
         </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 2 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=7" style="text-decoration: none; color: #353839">
+        <img src="images/lenovotab.jpg" class="card-img-top img-fluid" alt="Product 2" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Tablet LENOVO Tab M11 + Rysik</h6>
+          <p class="card-text">Cena: <s>699.90 zł</s></p>
+          <p class="card-text"><strong>649.00 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 3 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=6" style="text-decoration: none; color: #353839">
+        <img src="images/redragon.jpg" class="card-img-top img-fluid" alt="Product 3" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Mysz REDRAGON M916AK-PRO</h6>
+          <p class="card-text">Cena: <s>299.99 zł</s></p>
+          <p class="card-text"><strong>249.99 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 4 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=3" style="text-decoration: none; color: #353839">
+        <img src="images/Lenovo legion 5-16.jpg" class="card-img-top img-fluid" alt="Product 4" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Lenovo Legion 5-16</h6>
+          <p class="card-text">Cena: <s>6499.00 zł</s></p>
+          <p class="card-text"><strong>6199.00 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 5 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=2" style="text-decoration: none; color: #353839">
+        <img src="images/samsunggalaxys24ultra.jpg" class="card-img-top img-fluid" alt="Product 5" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Samsung Galaxy S24 Ultra 512GB</h6>
+          <p class="card-text">Cena: <s>4999.99 zł</s></p>
+          <p class="card-text"><strong>4799.99 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 6 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=5" style="text-decoration: none; color: #353839">
+        <img src="images/razer basilisk v3.jpg" class="card-img-top img-fluid" alt="Product 6" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Razer Basilisk V3</h6>
+          <p class="card-text">Cena: <s>189.99 zł</s></p>
+          <p class="card-text"><strong>169.99 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 7 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=8" style="text-decoration: none; color: #353839">
+        <img src="images/iphone16pink.jpg" class="card-img-top img-fluid" alt="Product 7" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Apple Iphone 16 Pink 128GB</h6>
+          <p class="card-text">Cena: <s>4099.00 zł</s></p>
+          <p class="card-text"><strong>3899.00 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Product 8 -->
+  <div class="col">
+    <div class="card h-100" style="border: none;">
+      <a href="produktDane?id=9" style="text-decoration: none; color: #353839">
+        <img src="images/macbookm4.jpg" class="card-img-top img-fluid" alt="Product 8" style="max-height: 150px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h6 class="card-title">Laptop APPLE MacBook Pro 2024</h6>
+          <p class="card-text">Cena: <s>11490.00</s></p>
+          <p class="card-text"><strong>10499.00 zł</strong></p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   </div>
@@ -232,7 +247,7 @@
 
 
   <!-- Third Row -->
-  <div class="row mb-3" id='nowosci'>
+  <div class="row mb-3 d-none d-md-flex" id='nowosci'>
   <div class="col-12">
     <div class="p-3 bg-light shadow-sm rounded-0">
       <!-- Заголовок -->

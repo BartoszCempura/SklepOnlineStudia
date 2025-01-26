@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-center align-items-center" style="height: 50vh; margin: 6rem 0 6rem 0;">
-    <div class="w-25 border p-3 shadow" style="margin: 50px 0;">
+<div class="d-flex justify-content-center align-items-center" style="height: 50vh; margin: 8rem 0 8rem 0;">
+    <div class="w-sm-25 border p-3 shadow">
 
     <?php
   require_once __DIR__ . '/..//../include/global.php';

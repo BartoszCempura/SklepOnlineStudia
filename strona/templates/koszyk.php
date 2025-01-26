@@ -21,7 +21,7 @@
 <div class="container my-4">
     <div class="row">
         <!-- pojemnik na obiekty dodane do koszyka -->
-            <div class="col-9 p-3 border shadow-sm rounded-0"> 
+            <div class="col-sm-6 col-md-9 p-3 border shadow-sm rounded-0"> 
                     <?php
                     if(!empty($userID))
                     {
@@ -30,7 +30,7 @@
                     ?>      
             </div>
         <!-- pojemnik na przyciski i cenę -->
-            <div class="col-3"> 
+            <div class="col-sm-6 col-md-3"> 
                 <div class="p-3 border shadow-sm rounded-0">
                     <div class="d-flex justify-content-between">
                         <p class="mt-3 p-0">Do zapłaty:</p>

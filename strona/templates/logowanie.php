@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
-    <div class="w-25 border p-3 shadow" style="margin: 50px 0;">
+    <div class="w-sm-25 border p-3 shadow">
 
 
     <?php
