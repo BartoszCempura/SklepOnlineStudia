@@ -1,3 +1,8 @@
+
+</br>
+<p align="center">-------------------------------------------------- PL --------------------------------------------------</p>
+</br>
+
 Projekt SklepOnlineStudia to prosty sklep internetowy zbudowany w PHP, korzystający z szablonów i bazy MySQL.
 
 Zaimplementowano:
@@ -13,6 +18,10 @@ PHP (serwerowa logika)
 MySQL / MariaDB (bazy clientDB i siteDB)
 HTML/CSS/JavaScript (interfejs, statyczne zasoby)
 struktura z szablonem base.php i widokami w templates
+
+</br>
+<p align="center">-------------------------------------------------- PL --------------------------------------------------</p>
+</br>
 
 The SklepOnlineStudia project is a simple online store built in PHP, using templates and a MySQL database.
 
