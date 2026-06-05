@@ -20,7 +20,7 @@ HTML/CSS/JavaScript (interfejs, statyczne zasoby)
 struktura z szablonem base.php i widokami w templates
 
 </br>
-<p align="center">-------------------------------------------------- PL --------------------------------------------------</p>
+<p align="center">-------------------------------------------------- EN --------------------------------------------------</p>
 </br>
 
 The SklepOnlineStudia project is a simple online store built in PHP, using templates and a MySQL database.
